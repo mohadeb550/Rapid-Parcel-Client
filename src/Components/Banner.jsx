@@ -1,11 +1,14 @@
+import { useLocation } from "react-router-dom"
 
 export default function Banner() {
 
-    return (
-     <div  className="hero h-[480px] lg:h-[520px] mb-3 md:mb-8 font-play flex flex-col md:flex-row justify-around items-center bg-[#014BA0] absolute top-0 left-0 right-0 px-10 md:px-16" >
+    const location = useLocation();
 
-<div className="flex-1 h-full w-full pt-20">
-        <img src="Daco_61330534.png" className=" h-[200px] md:h-full w-full object-contain" />
+    return (
+     <div  className="hero h-[480px] lg:h-[500px] mb-3 md:mb-8 font-play flex flex-col md:flex-row justify-around items-center bg-[#014BA0]  px-10 md:px-16 md:pb-12" >
+
+<div className="flex-1 h-full w-full pt-6 md:pt-14">
+        <img src="Daco_61330534.png" className=" bg-amber-400 rounded-full h-[200px] md:h-full w-full object-contain" />
     </div>
     
     <div className=" text-center text-neutral-content flex-1">
