@@ -1,8 +1,8 @@
 import { createBrowserRouter} from "react-router-dom";
 import Layout from "../Layout/Layout";
+import UnAuthorized from "../Pages/Error/UnAuthorized";
 import Home from "../Pages/Home";
-import NotFound from "../Pages/ErrorPage/NotFound";
-import UnAuthorized from "../Pages/ErrorPage/UnAuthorized";
+import NotFound from "../Pages/Error/NotFound";
 
 
 

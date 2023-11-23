@@ -7,7 +7,9 @@ export default {
   theme: {
     fontFamily: {
       play: ['Play', 'sans-serif'],
+      titan: ['Titan One', 'sans-serif'],
       serif: ['Merriweather', 'serif'],
+      racing: ['Racing Sans One', 'sans-serif'],
     },
     extend: {
       darkMode: 'class',
