@@ -5,6 +5,7 @@ import Home from "../Pages/Home";
 import NotFound from "../Pages/Error/NotFound";
 import Login from "../Pages/Login";
 import SignUp from "../Pages/SignUp";
+import Dashboard from "../Layout/Dashboard";
 
 
 
@@ -18,7 +19,12 @@ import SignUp from "../Pages/SignUp";
         {path:'/sign-up', element : <SignUp/>},
       
     ]},
-    {path:'/unauthorized', element : <UnAuthorized/>}
+    {path:'/unauthorized', element : <UnAuthorized/>},
+
+    {path: '/dashboard', element: <Dashboard/> , children: [
+
+      {path: '/dashboard'}
+    ]}
   
   ]);
   
