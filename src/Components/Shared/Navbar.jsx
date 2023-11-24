@@ -53,7 +53,7 @@ export default function Navbar() {
 
     </div>
     <div className="flex items-center gap-1">
-    <img src='/1471-fotor-bg-remover-2023112402346.png' className="w-9 md:w-12 lg:w-[70px]"/>
+    <img src='/1471-fotor-bg-remover-2023112402346.png' className="w-9 md:w-12 lg:w-[73px]"/>
     <p className="text-[18px]  md:text-xl lg:text-2xl text-amber-400 font-racing"> Rapid <span className="text-white/90">Parcel</span> </p>
     </div>
   </div>

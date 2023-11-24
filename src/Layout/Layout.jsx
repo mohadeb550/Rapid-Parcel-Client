@@ -9,7 +9,7 @@ export default function Layout() {
   
 
   return (
-    <section className="max-w-[1400px] mx-auto relative">
+    <section className="max-w-[1400px] mx-auto">
    <Toaster/>
     <Navbar/>
     <Outlet/>
