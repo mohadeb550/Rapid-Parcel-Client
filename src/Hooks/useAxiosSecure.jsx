@@ -2,11 +2,11 @@ import axios from "axios"
 
 
 const axiosSecure = axios.create({
-    baseURL: '',
+    baseURL: 'http://localhost:5000',
     withCredentials: true,
 })
 
-export default function useAxios() {
+export default function useAxiosSecure() {
 
   return axiosSecure;
 }

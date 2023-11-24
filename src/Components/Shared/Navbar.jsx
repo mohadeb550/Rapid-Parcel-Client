@@ -16,9 +16,9 @@ export default function Navbar() {
 
 
   const navLinks = <>
-   <li ><NavLink className={({isActive})=> isActive? ' font-semibold bg-[#014BA0] text-white/95 px-3 py-[3px] rounded ': '' } to='/'> Home </NavLink></li>
-   <li ><NavLink className={({isActive})=> isActive? ' font-semibold bg-[#014BA0] text-white/95 px-3 py-[3px] rounded ': '' } to='/all-foods'> Dashboard </NavLink></li>
-   <li ><NavLink className={({isActive})=> isActive? ' font-semibold bg-[#014BA0] text-white/95 px-3 py-[3px] rounded ': '' } to='/blog'> Blog </NavLink></li>
+   <li ><NavLink className={({isActive})=> isActive? ' font-semibold text-amber-400 px-3 py-[3px] rounded ': '' } to='/'> Home </NavLink></li>
+   <li ><NavLink className={({isActive})=> isActive? ' font-semibold text-amber-400 px-3 py-[3px] rounded ': '' } to='/all-foods'> Dashboard </NavLink></li>
+   <li ><NavLink className={({isActive})=> isActive? ' font-semibold text-amber-400 px-3 py-[3px] rounded ': '' } to='/blog'> Blog </NavLink></li>
   
   </>
 
@@ -69,7 +69,7 @@ export default function Navbar() {
     <div className="mr-4">
     <IoNotificationsSharp className="text-amber-500 cursor-pointer" size={25} /> 
     </div>
-        {!currentUser && <Link to='/login'><button className={`font-semibold  text-sm md:text-[16px] p-1 px-3 rounded bg-gray-50 hover:bg-gray-100 `}> Login </button></Link>}
+        {!currentUser && <Link to='/login'><button className={`font-semibold text-[#014BA0]  text-sm md:text-[16px] p-1 px-3 rounded bg-gray-50 hover:bg-gray-100 `}> Login </button></Link>}
         
         <div className="z-30 lg:w-10 rounded-full p-[2px] mr-2">
           {currentUser && <img tabIndex={0} src={currentUser?.photoURL || 'https://i.ibb.co/Ttgtb82/pngwing-com-15.png' } className="dropdown w-8 md:w-9 cursor-pointer rounded-full border border-lime-500 p-[1px]" />}
