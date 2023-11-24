@@ -2,6 +2,8 @@
 
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import CountUp from 'react-countup';
+
 
 
 export default function Insights() {
@@ -29,7 +31,7 @@ export default function Insights() {
   <div className="p-6 pt-0">
     <h5
       className="mb-4 text-2xl font-semibold leading-tight text-amber-500 dark:text-neutral-50 text-center">
-   <span className="text-3xl text-[#014BA0] font-racing"> 720</span> Parcel Booked!
+   <span className="text-3xl text-[#014BA0] font-racing"> <CountUp end={370} duration={4} /></span> Parcel Booked!
     </h5>
   
 
@@ -50,7 +52,7 @@ export default function Insights() {
   <div className="p-6 pt-0">
     <h5
       className="mb-4 text-2xl font-semibold leading-tight text-amber-500 dark:text-neutral-50 text-center">
-  <span className="text-3xl text-[#014BA0] font-racing">1340</span> Parcel Delivered!
+  <span className="text-3xl text-[#014BA0] font-racing"><CountUp end={1320} duration={4} /></span> Parcel Delivered!
     </h5>
   
   
@@ -72,7 +74,7 @@ export default function Insights() {
   <div className="p-6 pt-0">
     <h5
       className="mb-4 text-2xl font-semibold leading-tight text-amber-500 dark:text-neutral-50 text-center">
-    Our <span className="text-3xl text-[#014BA0] font-racing"> 3200</span> Users!
+    Our <span className="text-3xl text-[#014BA0] font-racing"> <CountUp end={720} duration={4} /></span> Users!
     </h5>
   
     

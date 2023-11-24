@@ -1,6 +1,7 @@
 import Banner from "../Components/Banner";
 import Insights from "../Components/Insights";
 import OurFeatures from "../Components/OurFeatures";
+import TopDeliveryMen from "../Components/TopDeliveryMen";
 
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
 
     <OurFeatures/>
     <Insights/>
+    <TopDeliveryMen/>
     </section>
     </>
   )
