@@ -6,6 +6,7 @@ import NotFound from "../Pages/Error/NotFound";
 import Login from "../Pages/Login";
 import SignUp from "../Pages/SignUp";
 import Dashboard from "../Layout/Dashboard";
+import AddParcel from "../Dashboard/Pages/AddParcel";
 
 
 
@@ -23,7 +24,7 @@ import Dashboard from "../Layout/Dashboard";
 
     {path: '/dashboard', element: <Dashboard/> , children: [
 
-      {path: '/dashboard'}
+      {path: '/dashboard/book-parcel', element: <AddParcel/>}
     ]}
   
   ]);
