@@ -1,4 +1,4 @@
-import {  GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import {  GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { createContext, useEffect, useState } from "react"
 import auth from "../config/firebase.config";
 import { Oval } from "react-loader-spinner";
@@ -33,6 +33,12 @@ export default function AuthProvider({children}) {
       return signInWithEmailAndPassword(auth, email, password);
     }
 
+    // update user profile 
+    const updateUserProfile = (name, image) => {
+      return updateProfile(auth.currentUser, {displayName: name, photoURL: image})
+    }
+
+
     // logout user 
     const logOut = () => {
      return signOut(auth);
@@ -53,7 +59,7 @@ export default function AuthProvider({children}) {
 
 
 
-    const authInfo = { createUser , loginWithGoogle ,loginUser, logOut ,currentUser  }
+    const authInfo = { createUser , loginWithGoogle ,loginUser, logOut, updateUserProfile ,currentUser  }
 
     if(authLoading ){return  <Oval
       height={50}

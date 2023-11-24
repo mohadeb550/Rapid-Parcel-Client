@@ -8,6 +8,7 @@ import SignUp from "../Pages/SignUp";
 
 
 
+
  const router = createBrowserRouter([
 
     {path: "/", element: <Layout/> , errorElement: <NotFound/>,  children:[

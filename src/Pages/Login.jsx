@@ -1,11 +1,8 @@
 
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import toast  from "react-hot-toast";
-import { FcGoogle } from 'react-icons/fc'
 import useAuth from "../Hooks/useAuth";
 import { Helmet } from "react-helmet";
-import axios from "axios";
-import { useMutation } from "@tanstack/react-query";
 import SocialLogin from "../Components/Shared/SocialLogin";
 
 
@@ -13,26 +10,11 @@ import SocialLogin from "../Components/Shared/SocialLogin";
 export default function Login() {
 
 
-  const { loginUser , loginWithGoogle , currentUser } = useAuth();
+  const { loginUser , currentUser } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
 
-
-  const { mutateAsync: generateJwt } = useMutation({
-    mutationKey: ['generateJwt'],
-    mutationFn: async (payload) => {
-      return axios.post(`https://savorspot-cafe-server.vercel.app/jwt`, payload, { withCredentials: true})
-    }
-  })
-  
-  
-  const { mutateAsync: saveUser } = useMutation({
-    mutationKey: ['save-user'],
-    mutationFn: async (updatedUser) => {
-      return axios.put(`https://savorspot-cafe-server.vercel.app/save-user/`, updatedUser)
-    }
-  })
-
+  const from = location.state?.from?.pathname || '/'; 
 
 
     const handleLogin = (e) => {
@@ -46,52 +28,17 @@ export default function Login() {
         .then(result => {
 
             toast.success('Login Successful !',{duration:3000});
-
-            generateJwt({email})
-            .then(data => {
-              if(data.data.success){
-                navigate(location.state? location.state : '/');
-              }
-            })
-
+            navigate(from);
         })
         .catch(error =>  toast.error(error.message))
     }
-
-    const googleLogin = () => {
-      loginWithGoogle()
-      .then(result => {
-          toast.success('Login Successful!')
-      
-          generateJwt({email: result.user.email})
-          .then(data => {
-            console.log(data.data)
-            if(data.data.success){
-              navigate(location.state? location.state : '/');
-            }
-          })
-
-          saveUser({name: result.user.displayName, email : result.user.email, photoURL : result.user.photoURL })
-          .then(data => {
-
-            if(data.data.modifiedCount > 0 || data.data.upsertedCount > 0 || data.data.matchedCount > 0){
-              console.log('userInfo saved successfully')
-            }
-          })
-    
-      })
-      .catch(error => {
-          toast.error(error.message)
-      })
-  }
-
 
 
   return(
     <div className="hero h-[600px] pb-32 md:pb-0 md:h-[700px] px-4 bg-base-200 bg-[url('/6674908_3386851.jpg')]">
 
     <Helmet>
-        <title> SavorSpotCafe / Login </title>
+        <title> Rapid Parcel / Login </title>
       </Helmet>
     <div className="hero-content flex-col w-full">
 
@@ -99,7 +46,7 @@ export default function Login() {
         <h1 className="text-3xl lg:text-[32px] text-white/90  px-24 py-3 font-bold text-center font-play">Login now!</h1>
       </div>
 
-      <div className="rounded-md flex-shrink-0 w-full max-w-2xl shadow-2xl bg-black/40">
+      <div className="rounded-md flex-shrink-0 w-full max-w-2xl shadow-2xl bg-black/30">
         <div className="p-10">
 
 

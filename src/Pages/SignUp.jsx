@@ -1,53 +1,75 @@
 
 import { Link, useNavigate } from "react-router-dom";
-import auth from "../config/firebase.config.js";
 
-import toast  from "react-hot-toast";
-import { FcGoogle } from 'react-icons/fc'
 import { Helmet } from "react-helmet-async";
-import useAuth from "../Hooks/useAuth.js";
 import { useForm } from "react-hook-form";
 import useAxiosPublic from "../Hooks/useAxiosPublic.jsx";
 import SocialLogin from "../Components/Shared/SocialLogin.jsx";
+import toast from "react-hot-toast";
+import useAuth from "../Hooks/useAuth.js";
 
 
+
+const imageHostingKey = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const imageUploadApi = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`
 
 
 
 export default function SignUp() {
   const { register, handleSubmit, formState: {errors}} = useForm();
+  const axiosPublic = useAxiosPublic()
+ 
 
-
-    const { createUser , updateUserProfile } = useAuth();
+ 
+    const { createUser , updateUserProfile } = useAuth()
     const navigate = useNavigate();
 
 
-    const onSubmit = (data) => {
-      createUser(data.email, data.password)
-        .then(result => {
-        
-           updateUserProfile(result.displayName, result.photo_URL)
-           .then(result => {
-           
-            // save user info in database
-          
-          })
+    const onSubmit = async (data) => {
 
+      const imageData = { image: data.photo[0] };
+
+      const res = await axiosPublic.post(imageUploadApi, imageData, {
+        headers: {
+          'content-type' : 'multipart/form-data'
+        }
+      })
+      const imageURL =  res.data.data.display_url;
+
+
+      createUser(data.email, data.password)
+      .then(result => {
+         updateUserProfile(data.name, imageURL)
           
-        })
-        .catch(error =>  {
-            console.log(error)
-            toast.error('Something went wrong!')
-        })
+          const userInfo = {
+            name: data.name,
+            email: result.user.email,
+            image: imageURL,
+            role: data.role
+          }
+          // now save the user in database 
+         axiosPublic.post('/users', userInfo)
+         .then(res => {
+          if(res.data.insertedId){
+            navigate('/');
+          }
+         })
+      })
+      .catch(error =>  {
+          console.log(error)
+          toast.error('Something went wrong!')
+      })
+     
+    
     }
 
 
 
   return (
-    <div className="hero h-[700px] md:h-[800px] px-4 bg-[url('/15151445_5559852.jpg')]">
+    <div className="hero h-[700px] md:h-[900px] px-4 bg-[url('/15151445_5559852.jpg')]">
 
       <Helmet>
-        <title> BistroBoss / Sign-up </title>
+        <title> Rapid Parcel / Sign-up </title>
       </Helmet>
     <div className="hero-content flex-col w-full gap-0">
 
@@ -65,17 +87,10 @@ export default function SignUp() {
             <label className="label">
               <span className="">Name</span>
             </label>
-            <input type="text" placeholder="Name" className="input input-bordered  bg-transparent  border-white/30" {...register('name',{required: true, minLength: 6, maxLength: 10})} />
+            <input type="text" placeholder="Name" className="input input-bordered  bg-transparent  border-white/30" {...register('name',{required: true, minLength: 3, maxLength: 10})} />
             <span className="text-red-400 font-semibold text-sm p-1"> {errors.name?.type === 'required' && 'Name is required'} {errors.name?.type === 'minLength' && 'Name Must Have 6 Characters'} {errors.name?.type === 'maxLength' && 'Name Maximum 8 Characters'}  </span>
           </div>
 
-          <div className="form-control">
-            <label className="label">
-              <span className="">Photo URL</span>
-            </label>
-            <input type="text" placeholder="Name" className="input input-bordered  bg-transparent  border-white/30" {...register('photo',{required: true})} />
-            <span className="text-red-400 font-semibold text-sm p-1"> {errors.photo?.type === 'required' && 'Photo URL is required'}  </span>
-          </div>
 
           <div className="form-control">
             <label className="label">
@@ -94,6 +109,29 @@ export default function SignUp() {
             <input type="text" placeholder="Password" className="input input-bordered  bg-transparent  border-white/30" {...register('password', {required: true, pattern:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{6,8}$/ })} />
 
             <span className="text-red-400 font-semibold text-sm p-1"> {errors.password?.type === 'required' && 'Password is required'} {errors.password?.type === 'pattern' && 'Min 1 uppercase letter, 1 lowercase letter, 1 special character, 1 number, min 6 characters, max 8 characters.'} </span>
+
+            <div className="form-control">
+            <label className="label">
+              <span className="">Upload Photo</span>
+            </label>
+
+            <div className="mb-3">
+      <input
+    className="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-clip-padding px-3 py-[0.32rem] text-base font-normal text-neutral-400 transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-neutral-100 file:px-3 file:py-[0.32rem] file:text-neutral-700 file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:file:bg-neutral-700 dark:file:text-neutral-100 dark:focus:border-primary"
+    type="file"
+    id="formFileMultiple"
+    multiple {...register('photo',{required: true})} /></div>
+
+            
+            <span className="text-red-400 font-semibold text-sm p-1"> {errors.photo?.type === 'required' && 'Photo is required'}  </span>
+          </div>
+
+          <div>
+          <select defaultValue={'user'} className="select select-info w-full bg-transparent" {...register('role')}>
+       <option value='user' className="bg-[#014BA0]">User</option>
+          <option value='delivery-man' className="bg-[#014BA0]">Delivery Man</option>
+        </select>
+          </div>
            
             <div>
                 <h4 className="text-sm font-semibold text-amber-400"> Already Have An Account? <Link to='/login'> <span className="text-white/80 hover:underline"> Login</span></Link> </h4>

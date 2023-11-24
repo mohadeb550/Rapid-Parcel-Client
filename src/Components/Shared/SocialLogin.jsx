@@ -1,8 +1,8 @@
 import toast from "react-hot-toast";
-import useAuth from "../../Hooks/useAuth";
 import { FcGoogle } from "react-icons/fc";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import useAuth from "../../Hooks/useAuth";
 
 
 export default function SocialLogin() {
@@ -10,18 +10,27 @@ export default function SocialLogin() {
     const { loginWithGoogle} = useAuth();
     const navigate = useNavigate();
     const axiosPublic = useAxiosPublic();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || '/'; 
 
     const googleLogin = () => {
       
         loginWithGoogle()
          .then(result => {
          
-            axiosPublic.post('/users', {name: result.user.displayName, email: result.user.email})
-            .then(data => {
-            //   if(data.data.insertedId){
-            //    navigate('/');
+            axiosPublic.post('/users', {
+              name: result.user?.displayName,
+             email: result.user.email,
+             image: result.user?.photoURL,
+             role:'user'
+            })
+            .then(res => {
+              console.log(res.data)
+              if(res.data.insertedId || res.data.message === 'Exist'){
+               navigate(from);
               toast.success('Login Successful!',{duration: 3000});
-            //   }
+              }
             })
          })
          .catch(error => {
