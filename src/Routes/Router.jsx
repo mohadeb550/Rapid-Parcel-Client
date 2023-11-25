@@ -7,6 +7,8 @@ import Login from "../Pages/Login";
 import SignUp from "../Pages/SignUp";
 import Dashboard from "../Layout/Dashboard";
 import AddParcel from "../Dashboard/Pages/AddParcel";
+import MyParcels from "../Dashboard/MyParcels";
+import UpdateParcel from "../Dashboard/UpdateParcel";
 
 
 
@@ -24,7 +26,9 @@ import AddParcel from "../Dashboard/Pages/AddParcel";
 
     {path: '/dashboard', element: <Dashboard/> , children: [
 
-      {path: '/dashboard/book-parcel', element: <AddParcel/>}
+      {path: '/dashboard/book-parcel', element: <AddParcel/>},
+      {path: '/dashboard/my-parcels', element: <MyParcels/>},
+      {path: '/dashboard/update-parcel/:id', element: <UpdateParcel/>},
     ]}
   
   ]);
