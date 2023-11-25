@@ -44,6 +44,7 @@ export default function SignUp() {
           const userInfo = {
             name: data.name,
             email: result.user.email,
+            phone: data.phone,
             image: imageURL,
             role: data.role
           }
@@ -66,7 +67,7 @@ export default function SignUp() {
 
 
   return (
-    <div className="hero h-[700px] md:h-[900px] px-4 bg-[url('/15151445_5559852.jpg')]">
+    <div className="hero h-[700px] md:h-[1000px] px-4 bg-[url('/15151445_5559852.jpg')]">
 
       <Helmet>
         <title> Rapid Parcel / Sign-up </title>
@@ -109,6 +110,12 @@ export default function SignUp() {
             <input type="text" placeholder="Password" className="input input-bordered  bg-transparent  border-white/30" {...register('password', {required: true, pattern:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{6,8}$/ })} />
 
             <span className="text-red-400 font-semibold text-sm p-1"> {errors.password?.type === 'required' && 'Password is required'} {errors.password?.type === 'pattern' && 'Min 1 uppercase letter, 1 lowercase letter, 1 special character, 1 number, min 6 characters, max 8 characters.'} </span>
+
+            <label className="label">
+              <span className="">Phone</span>
+            </label>
+            <input type="number" placeholder="Phone" className="input input-bordered  bg-transparent  border-white/30" {...register('phone', {required: true })} />
+            <span className="text-red-400 font-semibold text-sm p-1"> {errors.phone?.type === 'required' && 'Phone is required'} </span>
 
             <div className="form-control">
             <label className="label">

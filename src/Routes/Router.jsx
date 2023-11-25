@@ -9,6 +9,10 @@ import Dashboard from "../Layout/Dashboard";
 import AddParcel from "../Dashboard/Pages/AddParcel";
 import MyParcels from "../Dashboard/MyParcels";
 import UpdateParcel from "../Dashboard/UpdateParcel";
+import MyProfile from "../Dashboard/Pages/MyProfile";
+import AllParcels from "../Dashboard/Pages/AllParcels";
+import AllDeliveryMan from "../Dashboard/Pages/AllDeliveryMan";
+
 
 
 
@@ -29,6 +33,9 @@ import UpdateParcel from "../Dashboard/UpdateParcel";
       {path: '/dashboard/book-parcel', element: <AddParcel/>},
       {path: '/dashboard/my-parcels', element: <MyParcels/>},
       {path: '/dashboard/update-parcel/:id', element: <UpdateParcel/>},
+      {path: '/dashboard/my-profile', element: <MyProfile/>},
+      {path: '/dashboard/all-parcels', element: <AllParcels/>},
+      {path: '/dashboard/all-delivery-man', element: <AllDeliveryMan/>},
     ]}
   
   ]);

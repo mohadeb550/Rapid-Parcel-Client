@@ -37,9 +37,8 @@ export default function UpdateParcel () {
         cost: parseInt(form.cost.value),
     }
   
-      axiosSecure.put(`/update/${parcel._id}`, updatedParcel)
+      axiosSecure.patch(`/update/${parcel._id}`, updatedParcel)
       .then(res => {
-        console.log(res)
         if(res.data.modifiedCount || res.data.matchedCount){
           toast.success('Parcel Updated Successfully', {duration: 3000})
         }
