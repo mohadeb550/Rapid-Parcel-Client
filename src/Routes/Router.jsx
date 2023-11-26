@@ -15,6 +15,7 @@ import AllDeliveryMan from "../Dashboard/Pages/AllDeliveryMan";
 import AllUsers from "../Dashboard/Pages/AllUsers";
 import DeliveryList from "../Dashboard/Pages/DeliveryList";
 import Statistics from "../Dashboard/Pages/Statistics";
+import MyReviews from "../Dashboard/Pages/MyReviews";
 
 
 
@@ -42,6 +43,7 @@ import Statistics from "../Dashboard/Pages/Statistics";
       {path: '/dashboard/all-users', element: <AllUsers/>},
       {path: '/dashboard/delivery-list', element: <DeliveryList/>},
       {path: '/dashboard/statistics', element: <Statistics/>},
+      {path: '/dashboard/my-reviews', element: <MyReviews/>},
     ]}
   
   ]);

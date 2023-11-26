@@ -20,7 +20,6 @@ export default function ManageParcel({ open, setOpen, parcelId}) {
     axiosSecure.patch(`/update/${parcelId}`, updateParcel )
     .then(res => {
       if(res.data.modifiedCount || res.data.matchedCount){
-        console.log(res)
         refetch();
         setOpen(false);
         Swal.fire({

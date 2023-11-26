@@ -27,8 +27,10 @@ export default function ManageReview({ open, setOpen, deliveryManId}) {
           name: currentUser.displayName,
           email:currentUser.email,
           image: currentUser.photoURL,
+          review_date: new Date().toLocaleDateString(),
           rating: rating,
-          feedback: form.feedback.value,
+          feedback_title: form.feedback_title.value,
+          feedback_description: form.feedback_description.value,
           deliveryManId
       }
 
@@ -54,7 +56,7 @@ export default function ManageReview({ open, setOpen, deliveryManId}) {
        <form className="w-[400px] md:w-[500px] p-7 bg-white" onSubmit={handleSubmit}>
        <h2 className="text-center my-2 text-3xl text-gray-500 font-racing"> Leave A Review!</h2>
         <div className="flex justify-center items-center">
-          <img className="md:w-44 w-32 object-cover h-32 md:h-44" src={currentUser.photoURL} />
+          <img className="md:w-44 w-32 object-cover h-32 md:h-44 rounded-full" src={currentUser.photoURL} />
         </div>
 
 <div className="relative z-0 w-full mb-5 group">
@@ -68,9 +70,10 @@ export default function ManageReview({ open, setOpen, deliveryManId}) {
     
 </div>
 <div className="flex flex-col ">
-    <label> Feedback!</label>
-    <textarea name="feedback" className="outline-none rounded-md my-2" />
-    
+    <label> Feedback Title</label>
+    <textarea name="feedback_title" className="outline-none rounded-md my-2" rows={1} />
+    <label> Feedback Description  </label>
+    <textarea name="feedback_description" className="outline-none rounded-md my-2" />
 </div>
         <div className="my-2 text-3xl text-[#014BA0]">
         <Rating

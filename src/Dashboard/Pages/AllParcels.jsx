@@ -14,10 +14,10 @@ import ManageParcel from "../../Components/Shared/MangeParcel";
 export default function AllParcels() {
 
   const axiosSecure = useAxiosSecure()
+  const [ parcelId ,setParcelId ] = useState('');
   const [ isOpen ,setIsOpen ] = useState(false);
-
+  
     const { allParcels , refetch, isLoading } = useAllParcels();
-
 
 
 
@@ -142,9 +142,9 @@ export default function AllParcels() {
               <td className="whitespace-nowrap font-medium  text-sm md:text-lg border-r px-6 py-4 dark:border-neutral-500">
              
             
-             <button onClick={() => setIsOpen(!isOpen)} className={`bg-amber-600 p-1 px-2 md:py-2 md:px-4 text-white rounded font-semibold transition-all hover:bg-amber-700 text-[12px] md:text-base disabled:bg-gray-200 disabled:text-gray-400`} > 
+             <button onClick={() => {setParcelId(parcel._id); setIsOpen(!isOpen)}} className={`bg-amber-600 p-1 px-2 md:py-2 md:px-4 text-white rounded font-semibold transition-all hover:bg-amber-700 text-[12px] md:text-base disabled:bg-gray-200 disabled:text-gray-400`} > 
              Manage </button>
-           {isOpen && <ManageParcel open={isOpen} setOpen={setIsOpen} parcelId={parcel._id} />}
+           {isOpen && <ManageParcel open={isOpen} setOpen={setIsOpen} parcelId={parcelId} />}
     
                </td>
             
