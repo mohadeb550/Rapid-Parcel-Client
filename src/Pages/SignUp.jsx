@@ -7,6 +7,8 @@ import useAxiosPublic from "../Hooks/useAxiosPublic.jsx";
 import SocialLogin from "../Components/Shared/SocialLogin.jsx";
 import toast from "react-hot-toast";
 import useAuth from "../Hooks/useAuth.js";
+import { useState } from "react";
+import { Oval } from "react-loader-spinner";
 
 
 
@@ -18,6 +20,7 @@ const imageUploadApi = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`
 export default function SignUp() {
   const { register, handleSubmit, formState: {errors}} = useForm();
   const axiosPublic = useAxiosPublic()
+  const [ loading , setLoading ] = useState(false)
  
 
  
@@ -26,6 +29,7 @@ export default function SignUp() {
 
 
     const onSubmit = async (data) => {
+      setLoading(true)
 
       const imageData = { image: data.photo[0] };
 
@@ -52,6 +56,7 @@ export default function SignUp() {
          axiosPublic.post('/users', userInfo)
          .then(res => {
           if(res.data.insertedId){
+            setLoading(false)
             navigate('/');
           }
          })
@@ -88,8 +93,8 @@ export default function SignUp() {
             <label className="label">
               <span className="">Name</span>
             </label>
-            <input type="text" placeholder="Name" className="input input-bordered  bg-transparent  border-white/30" {...register('name',{required: true, minLength: 3, maxLength: 10})} />
-            <span className="text-red-400 font-semibold text-sm p-1"> {errors.name?.type === 'required' && 'Name is required'} {errors.name?.type === 'minLength' && 'Name Must Have 6 Characters'} {errors.name?.type === 'maxLength' && 'Name Maximum 8 Characters'}  </span>
+            <input type="text" placeholder="Name" className="input input-bordered  bg-transparent  border-white/30" {...register('name',{required: true, minLength: 3, maxLength: 20})} />
+            <span className="text-red-400 font-semibold text-sm p-1"> {errors.name?.type === 'required' && 'Name is required'} {errors.name?.type === 'minLength' && 'Name Must Have 3 Characters'} {errors.name?.type === 'maxLength' && 'Name Maximum 20 Characters'}  </span>
           </div>
 
 
@@ -148,7 +153,20 @@ export default function SignUp() {
           <SocialLogin/>
           </div>
           <div className="form-control mt-6">
-            <button className="bg-white/90 py-2 px-3 text-[#014BA0] rounded font-bold transition-all hover:bg-white/80 text-sm md:text-base" type="submit"> Sign Up </button>
+            <button className="bg-white/90 py-2 px-3 text-[#014BA0] rounded font-bold transition-all flex justify-center items-center hover:bg-white/80 text-sm md:text-base" type="submit"> {loading? <Oval
+      height={25}
+      width={25}
+      color="#014BA0"
+      wrapperStyle={{}}
+      wrapperClass=""
+      visible={true}
+      ariaLabel='oval-loading'
+      secondaryColor="#5A82BB)"
+      strokeWidth={4}
+      strokeWidthSecondary={4}
+    
+    /> : 'Sign Up '} 
+     </button>
           </div>
         </form>
 

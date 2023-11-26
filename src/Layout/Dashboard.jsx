@@ -14,6 +14,8 @@ import { TbTruckDelivery } from "react-icons/tb";
 import { Toaster } from "react-hot-toast";
 import useAllParcels from "../Hooks/useAllParcels";
 import useAllDeliveryMan from '../Hooks/useAllDeliveryMan'
+import useAllUsers from '../Hooks/useAllUsers'
+import { FaUserLarge } from "react-icons/fa6";
 
 export default function Dashboard() {
 
@@ -21,7 +23,8 @@ export default function Dashboard() {
     const { currentUser } = useAuth();
     const { allParcels } = useAllParcels();
     const { allDeliveryMan} = useAllDeliveryMan();
-
+    const { allUsers } = useAllUsers();
+ 
     const [ isOpen, setIsOpen ] = useState(true);
     const { data:user ={} , isLoading } = useQuery({
         queryKey: ['role'],
@@ -44,7 +47,7 @@ export default function Dashboard() {
 </button>
 
 
-    <section>
+    <section className={`${isOpen && 'bg-black/60 xl:bg-transparent fixed top-0 left-0 right-0 z-10 xl:z-0 xl:static w-full h-full'}`}>
 
    {isOpen &&  <aside className={`fixed top-0 left-0 z-10 pt-10 md:pt-14 xl:pt-16 bg-[#014BA0]  w-64 h-screen transition-transform `} >
    <div className="h-full px-3 py-4 overflow-y-auto  dark:bg-gray-800">
@@ -54,7 +57,7 @@ export default function Dashboard() {
       width={30}
       color="#98B3D1"
       wrapperStyle={{}}
-      wrapperClass="absolute top-[6%] md:top-[8%] left-2/4"
+      wrapperClass="absolute top-[6%] md:top-[4%] left-2/4"
       visible={true}
       ariaLabel='oval-loading'
       secondaryColor="#5A82BB)"
@@ -84,20 +87,7 @@ export default function Dashboard() {
               
            </NavLink>
         </li>
-        <li>
-           <NavLink to="/dashboard/my-profile" className="flex items-center p-2 text-gray-300 rounded-lg dark:text-white hover:bg-gray-900 dark:hover:bg-gray-700 group">
-              <FaUser size={23} className="text-gray-400" />
-              <span className="flex-1 ms-3 whitespace-nowrap">My Profile</span>
-              
-           </NavLink>
-        </li>
-        <li>
-           <NavLink to="/" className="flex items-center p-2 text-gray-300 rounded-lg dark:text-white hover:bg-gray-900 dark:hover:bg-gray-700 group">
-              <FaHome size={23} className="text-gray-400" />
-              <span className="flex-1 ms-3 whitespace-nowrap"> Home </span>
-              
-           </NavLink>
-        </li>
+        
      </ul>
      }
 
@@ -108,27 +98,21 @@ export default function Dashboard() {
          
          
     <li>
-       <NavLink to="/dashboard/my-delivery" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-       <TbTruckDelivery size={22} className="text-gray-600" />
+       <NavLink to="/dashboard/my-delivery" className="flex items-center p-2 text-gray-300 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+       <TbTruckDelivery size={22} className="text-gray-400" />
           <span className="flex-1 ms-3 whitespace-nowrap"> My Delivery</span>
           <span className="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span>
        </NavLink>
     </li>
 
     <li>
-       <NavLink to="/dashboard/my-reviews" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-       <FaRegStar size={22} className="text-gray-600" />
+       <NavLink to="/dashboard/my-reviews" className="flex items-center p-2 text-gray-300 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+       <FaRegStar size={22} className="text-gray-400" />
           <span className="flex-1 ms-3 whitespace-nowrap"> My Reviews </span>
           <span className="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span>
        </NavLink>
     </li>
-    <li>
-           <NavLink to="/" className="flex items-center p-2 text-gray-300 rounded-lg dark:text-white hover:bg-gray-900 dark:hover:bg-gray-700 group">
-              <FaHome size={23} className="text-gray-400" />
-              <span className="flex-1 ms-3 whitespace-nowrap"> Home </span>
-              
-           </NavLink>
-        </li>
+   
     
  
  </ul>
@@ -159,7 +143,7 @@ export default function Dashboard() {
             <NavLink to="/dashboard/all-users" className="flex items-center p-2 text-gray-300 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
             <HiUsers size={23} className="text-gray-400" />
                <span className="flex-1 ms-3 whitespace-nowrap"> All Users </span>
-               <span className="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span>
+               <span className="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300"> {allUsers?.length} </span>
             </NavLink>
          </li>
 
@@ -170,17 +154,27 @@ export default function Dashboard() {
                <span className="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300"> {allDeliveryMan.length} </span>
             </NavLink>
          </li>
-         <li>
+       
+      </ul>
+    }
+
+    
+    <ul className="border-t border-white/50 py-4 mt-2">
+    <li>
+           <NavLink to="/dashboard/my-profile" className="flex items-center p-2 text-gray-300 rounded-lg dark:text-white hover:bg-gray-900 dark:hover:bg-gray-700 group">
+              <FaUserLarge size={20} className="text-gray-400" />
+              <span className="flex-1 ms-3 whitespace-nowrap"> My Profile </span>
+              
+           </NavLink>
+        </li>
+    <li>
            <NavLink to="/" className="flex items-center p-2 text-gray-300 rounded-lg dark:text-white hover:bg-gray-900 dark:hover:bg-gray-700 group">
               <FaHome size={23} className="text-gray-400" />
               <span className="flex-1 ms-3 whitespace-nowrap"> Home </span>
               
            </NavLink>
         </li>
-         
-      
-      </ul>
-    }
+    </ul>
 
    </div>
 </aside>}

@@ -52,6 +52,7 @@ export default function MyProfile() {
           .then(res => {
             console.log(res.data)
             if(res.data.modifiedCount || res.data.matchedCount){
+              setOpen(false);
               toast.success('Profile Updated Successfully', {duration: 3000})
             }
           }).catch(error => {
@@ -153,7 +154,7 @@ export default function MyProfile() {
     
       <div className="mt-20 text-center border-b pb-12">
         <h1 className="text-4xl font-medium text-gray-700"> {userInfo.name} </h1>
-        <p className="font-light text-gray-600 mt-3">Bucharest, Romania</p>
+        <p className="font-light text-gray-600 mt-3"> {userInfo.address? userInfo.address : 'Your Address Here'}  </p>
     
         <p className="mt-2 text-gray-500"> User Id : {userInfo._id}</p>
         <p className="mt-8 text-gray-500"> Email - {userInfo.email}</p>

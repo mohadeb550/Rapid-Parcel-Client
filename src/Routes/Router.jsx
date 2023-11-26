@@ -12,6 +12,7 @@ import UpdateParcel from "../Dashboard/UpdateParcel";
 import MyProfile from "../Dashboard/Pages/MyProfile";
 import AllParcels from "../Dashboard/Pages/AllParcels";
 import AllDeliveryMan from "../Dashboard/Pages/AllDeliveryMan";
+import AllUsers from "../Dashboard/Pages/AllUsers";
 
 
 
@@ -36,6 +37,7 @@ import AllDeliveryMan from "../Dashboard/Pages/AllDeliveryMan";
       {path: '/dashboard/my-profile', element: <MyProfile/>},
       {path: '/dashboard/all-parcels', element: <AllParcels/>},
       {path: '/dashboard/all-delivery-man', element: <AllDeliveryMan/>},
+      {path: '/dashboard/all-users', element: <AllUsers/>},
     ]}
   
   ]);
