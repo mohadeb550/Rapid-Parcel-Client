@@ -39,7 +39,7 @@ export default function Dashboard() {
 
 
 
-<button onClick={() => setIsOpen(!isOpen)}  type="button" className="inline-flex fixed top-0 left-0 items-center p-1 md:p-2 mt-4 ms-3 text-sm text-gray-200 rounded-sm bg-[#014BA0]/90  m-1  z-20 ">
+<button onClick={() => setIsOpen(!isOpen)}  type="button" className="inline-flex fixed top-0 left-0 items-center p-1 md:p-2 mt-4 ms-3 text-sm text-gray-200 rounded-md bg-[#014BA0]/90  m-1  z-20 ">
    <span className="sr-only">Open sidebar</span>
    <svg className=" w-5 h-5 md:w-6 md:h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
    <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
@@ -101,7 +101,7 @@ export default function Dashboard() {
        <NavLink to="/dashboard/delivery-list" className="flex items-center p-2 text-gray-300 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
        <TbTruckDelivery size={22} className="text-gray-400" />
           <span className="flex-1 ms-3 whitespace-nowrap"> My Delivery List</span>
-          <span className="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">3</span>
+        
        </NavLink>
     </li>
 

@@ -6,7 +6,6 @@ import { Helmet } from "react-helmet";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
-import { useState } from "react";
 import useAuth from "../../Hooks/useAuth";
 
 

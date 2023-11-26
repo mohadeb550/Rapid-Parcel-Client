@@ -8,6 +8,7 @@ import useAxiosSecure from "../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import { useState } from "react";
+import ManageReview from "./ManageReview";
 
 
 
@@ -16,6 +17,7 @@ export default function MyParcels() {
   const { currentUser } = useAuth();
   const axiosSecure = useAxiosSecure();
   const [ currentStatus, setCurrentStatus ] = useState('');
+  const [ isOpen ,setIsOpen ] = useState(false);
 
   const { data: parcels = [] , isLoading, refetch} = useQuery({
     queryKey: ['my-parcels', currentStatus],
@@ -92,7 +94,7 @@ export default function MyParcels() {
     <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
       <div className="overflow-hidden">
         <table
-          className="min-w-full border text-center text-sm font-light dark:border-neutral-500">
+          className="min-w-full border  text-sm font-light dark:border-neutral-500">
           <thead className="border-b font-medium dark:border-neutral-500">
             <tr className="bg-[#014BA0] h-8 text-white/95 text-[12px] md:text-base">
               <th
@@ -180,7 +182,7 @@ export default function MyParcels() {
                 className="whitespace-nowrap font-semibold  text-sm md:text-lg border-r px-6 py-4 text-[#014BAf] dark:border-neutral-500">
                 {parcel.status}
               </td>
-              <td className="whitespace-nowrap font-medium  text-sm md:text-lg border-r px-6 py-4 dark:border-neutral-500">
+              <td className="whitespace-nowrap font-medium  text-center text-sm md:text-lg border-r px-6 py-4 dark:border-neutral-500">
              
              <Link to={`/dashboard/update-parcel/${parcel._id}`}>
              <button className={`bg-sky-600 p-1 px-2 md:py-2 md:px-4 text-white rounded font-semibold transition-all hover:bg-sky-700 text-[12px] md:text-base disabled:bg-gray-200 disabled:text-gray-400`} disabled={parcel.status !== 'pending' || parcel.status === 'cancelled'}  > 
@@ -190,21 +192,22 @@ export default function MyParcels() {
                </td>
               
 
-              <td className="whitespace-nowrap font-medium  text-sm md:text-lg border-r px-6 py-4 dark:border-neutral-500">
+              <td className="whitespace-nowrap font-medium text-sm md:text-lg border-r px-6 py-4 dark:border-neutral-500">
 
-             {parcel.status === 'delivered' ?  <Link to={`/update-food/`}>
-              <button className="bg-purple-700 p-1 px-2 md:py-2 md:px-4 text-white rounded font-semibold transition-all hover:bg-purple-800 text-[12px] md:text-base " > 
-             Give Review </button>
-             </Link> : 
-             
-            
-              <button onClick={() => handleCancel(parcel._id)} className="bg-red-600 p-1 px-2 md:py-2 md:px-4 text-white rounded font-semibold transition-all hover:bg-red-700 text-[12px] md:text-base disabled:bg-gray-200 disabled:text-gray-400" disabled={parcel.status !== 'pending' || parcel.status === 'cancelled'}> 
+             <div className="text-center">
+             {parcel.status === 'delivered' ? 
+              <button onClick={() => setIsOpen(!isOpen)} className="bg-purple-700  p-1 px-2 md:py-2 md:px-4 text-white rounded font-semibold transition-all hover:bg-purple-800 text-[12px] md:text-base " > 
+             Give Review </button>  
+             :    
+              <button onClick={() => handleCancel(parcel._id)} className="bg-red-600  p-1 px-2 md:py-2 md:px-4 text-white rounded font-semibold transition-all hover:bg-red-700 text-[12px] md:text-base disabled:bg-gray-200 disabled:text-gray-400" disabled={parcel.status !== 'pending' || parcel.status === 'cancelled'}> 
              Cancel </button>
           
              }
+             </div>
+              {isOpen && <ManageReview open={isOpen} setOpen={setIsOpen} deliveryManId={parcel.delivery_man_id} />}
                </td>
 
-              <td className="whitespace-nowrap font-medium  text-sm md:text-lg border-r px-6 py-4 dark:border-neutral-500">
+              <td className="whitespace-nowrap font-medium text-center  text-sm md:text-lg border-r px-6 py-4 dark:border-neutral-500">
             {
                 parcel.payment === 'due'? 
                 <Link to={`/update-food/`}>
