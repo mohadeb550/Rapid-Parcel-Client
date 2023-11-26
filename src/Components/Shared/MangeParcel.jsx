@@ -36,7 +36,7 @@ export default function ManageParcel({ open, setOpen, parcelId}) {
   }
 
   return (
-    <section className="w-screen h-screen fixed top-0 left-0 right-0 bottom-0 z-50  bg-black/40 flex justify-center items-center">
+    <section className="w-screen h-screen fixed top-0 left-0 right-0 bottom-0 z-50  bg-black/20 flex justify-center items-center">
        
        <form className="w-[400px] md:w-[500px] p-7 bg-white" onSubmit={handleSubmit}>
 

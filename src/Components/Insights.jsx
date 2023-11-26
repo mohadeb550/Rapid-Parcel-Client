@@ -1,25 +1,27 @@
 
 
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import CountUp from 'react-countup';
+import useAxiosPublic from '../Hooks/useAxiosPublic'
 
 
 
 export default function Insights() {
+  const axiosPublic = useAxiosPublic();
 
-    // const { data: specialMenus, isLoading } = useQuery({
-    //     queryKey:['specialMenu'],
-    //     queryFn: async () => {
-    //      const data = await axios.get(`https://savorspot-cafe-server.vercel.app/special-menu`);
-    //       return data.data;
-    //     }
-    //   })
+    const { data: insights = {} } = useQuery({
+        queryKey:['insights'],
+        queryFn: async () => {
+         const data = await axiosPublic.get('/insights');
+          return data.data;
+        }
+      })
 
+      const { totalBookedParcels, totalDeliveredParcels, totalUsers} = insights;
 
   return (
-    <section className="my-14 mt-8 lg:my-20">
-     <h1 className="text-[30px] md:text-3xl lg:text-[40px] text-[#014BA0] text-center font-racing mb-8 " > Rapid Parcel Insights </h1>
+    <section className="my-14 mt-8 lg:my-32">
+     <h1 className="text-[30px] md:text-3xl lg:text-[40px] text-[#014BA0] text-center font-racing mb-8 md:mb-12 " > Rapid Parcel <span className="text-amber-500">Insights</span> </h1>
 
      <section className="grid grid-cols-1 md:grid-cols-3 justify-items-center gap-7  mb-8 md:mb-12 px-8 md:px-0">
 
@@ -31,7 +33,7 @@ export default function Insights() {
   <div className="p-6 pt-0">
     <h5
       className="mb-4 text-2xl font-semibold leading-tight text-amber-500 dark:text-neutral-50 text-center">
-   <span className="text-3xl text-[#014BA0] font-racing"> <CountUp end={370} duration={4} /></span> Parcel Booked!
+   <span className="text-3xl text-[#014BA0] font-racing"> <CountUp end={totalBookedParcels} duration={4} /></span> Parcel Booked!
     </h5>
   
 
@@ -52,7 +54,7 @@ export default function Insights() {
   <div className="p-6 pt-0">
     <h5
       className="mb-4 text-2xl font-semibold leading-tight text-amber-500 dark:text-neutral-50 text-center">
-  <span className="text-3xl text-[#014BA0] font-racing"><CountUp end={1320} duration={4} /></span> Parcel Delivered!
+  <span className="text-3xl text-[#014BA0] font-racing"><CountUp end={totalDeliveredParcels} duration={4} /></span> Parcel Delivered!
     </h5>
   
   
@@ -74,7 +76,7 @@ export default function Insights() {
   <div className="p-6 pt-0">
     <h5
       className="mb-4 text-2xl font-semibold leading-tight text-amber-500 dark:text-neutral-50 text-center">
-    Our <span className="text-3xl text-[#014BA0] font-racing"> <CountUp end={720} duration={4} /></span> Users!
+    Our <span className="text-3xl text-[#014BA0] font-racing"> <CountUp end={totalUsers} duration={4} /></span> Users!
     </h5>
   
     

@@ -13,6 +13,8 @@ import MyProfile from "../Dashboard/Pages/MyProfile";
 import AllParcels from "../Dashboard/Pages/AllParcels";
 import AllDeliveryMan from "../Dashboard/Pages/AllDeliveryMan";
 import AllUsers from "../Dashboard/Pages/AllUsers";
+import DeliveryList from "../Dashboard/Pages/DeliveryList";
+import Statistics from "../Dashboard/Pages/Statistics";
 
 
 
@@ -38,6 +40,8 @@ import AllUsers from "../Dashboard/Pages/AllUsers";
       {path: '/dashboard/all-parcels', element: <AllParcels/>},
       {path: '/dashboard/all-delivery-man', element: <AllDeliveryMan/>},
       {path: '/dashboard/all-users', element: <AllUsers/>},
+      {path: '/dashboard/delivery-list', element: <DeliveryList/>},
+      {path: '/dashboard/statistics', element: <Statistics/>},
     ]}
   
   ]);
