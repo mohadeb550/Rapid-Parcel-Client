@@ -14,6 +14,7 @@ import ManageReview from "./ManageReview";
 
 export default function MyParcels() {
 
+  const [ deliveryManId, setDeliveryManId ] = useState('')
   const { currentUser } = useAuth();
   const axiosSecure = useAxiosSecure();
   const [ currentStatus, setCurrentStatus ] = useState('');
@@ -196,7 +197,7 @@ export default function MyParcels() {
 
              <div className="text-center">
              {parcel.status === 'delivered' ? 
-              <button onClick={() => setIsOpen(!isOpen)} className="bg-purple-700  p-1 px-2 md:py-2 md:px-4 text-white rounded font-semibold transition-all hover:bg-purple-800 text-[12px] md:text-base " > 
+              <button onClick={() => { setDeliveryManId(parcel.delivery_man_id) ;setIsOpen(!isOpen)}} className="bg-purple-700  p-1 px-2 md:py-2 md:px-4 text-white rounded font-semibold transition-all hover:bg-purple-800 text-[12px] md:text-base " > 
              Give Review </button>  
              :    
               <button onClick={() => handleCancel(parcel._id)} className="bg-red-600  p-1 px-2 md:py-2 md:px-4 text-white rounded font-semibold transition-all hover:bg-red-700 text-[12px] md:text-base disabled:bg-gray-200 disabled:text-gray-400" disabled={parcel.status !== 'pending' || parcel.status === 'cancelled'}> 
@@ -204,7 +205,7 @@ export default function MyParcels() {
           
              }
              </div>
-              {isOpen && <ManageReview open={isOpen} setOpen={setIsOpen} deliveryManId={parcel.delivery_man_id} />}
+              {isOpen && <ManageReview open={isOpen} setOpen={setIsOpen} deliveryManId={deliveryManId} />}
                </td>
 
               <td className="whitespace-nowrap font-medium text-center  text-sm md:text-lg border-r px-6 py-4 dark:border-neutral-500">

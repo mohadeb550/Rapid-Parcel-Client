@@ -2,6 +2,8 @@
 import { Oval } from "react-loader-spinner";
 import { Helmet } from "react-helmet";
 import useAllDeliveryMan from "../../Hooks/useAllDeliveryMan";
+import Rating from "react-rating";
+import { IoMdStar, IoMdStarOutline } from "react-icons/io";
 
 
 
@@ -49,7 +51,12 @@ export default function AllDeliveryMan() {
               <th
                 scope="col"
                 className="border-r px-6 py-0 md:py-2 lg:py-4 dark:border-neutral-500">
-            Total Delivery
+            Total Delivered
+              </th>
+              <th
+                scope="col"
+                className="border-r px-6 py-0 md:py-2 lg:py-4 dark:border-neutral-500">
+            Total Review
               </th>
               <th
                 scope="col"
@@ -90,11 +97,22 @@ export default function AllDeliveryMan() {
               </td>
               <td
                 className="whitespace-nowrap font-medium  text-sm md:text-lg border-r px-6 py-4 dark:border-neutral-500">
-                {man?.total_delivered}
+               <span className="p-2 px-6 bg-green-600 text-gray-100 rounded-full">  {man?.total_delivered}</span>
+              </td>
+              <td
+                className="whitespace-nowrap font-medium text-sm md:text-lg border-r px-6 py-4 dark:border-neutral-500">
+               <span className="p-2 bg-slate-200 rounded-full">  {man?.totalReviews}</span>
               </td>
               <td
                 className="whitespace-nowrap font-medium  text-sm md:text-lg border-r px-6 py-4 dark:border-neutral-500">
-                {man?.avg_review}
+                    <div className="my-2 text-2xl text-orange-400">
+        <Rating
+            initialRating={man?.avg_review}
+            emptySymbol={<IoMdStarOutline/>}
+            fullSymbol={<IoMdStar/>}
+          />
+        </div>
+              <span className="text-gray-500">  ( {man?.avg_review} )</span>
               </td>
             
             </tr>)}

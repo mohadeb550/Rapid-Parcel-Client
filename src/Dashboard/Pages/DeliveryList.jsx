@@ -76,12 +76,18 @@ export default function DeliveryList() {
       axiosSecure.patch(`/update/${id}`, updatedParcel)
     .then(res => {
       if(res.data.modifiedCount){
-        Swal.fire({
-          title: "Delivered!",
-          text: "You Delivered The Parcel 😜!",
-          icon: "success"
-        });
-        refetch();
+        
+        axiosSecure.patch(`/update-total-delivered/${currentUser.email}`)
+        .then(res => {
+          if(res.data.modifiedCount){
+            Swal.fire({
+              title: "Delivered!",
+              text: "You Delivered The Parcel 😜!",
+              icon: "success"
+            });
+            refetch();
+          }
+        })
       }
     }).catch(error => {
       toast.error('Something Went Wrong, Try Again', {duration: 3000})

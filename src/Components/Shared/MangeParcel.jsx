@@ -11,6 +11,7 @@ export default function ManageParcel({ open, setOpen, parcelId}) {
     const { allDeliveryMan } = useAllDeliveryMan();
     const { allParcels , refetch} = useAllParcels();
 
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -47,7 +48,7 @@ export default function ManageParcel({ open, setOpen, parcelId}) {
               
         </select>
         <label className="text-left text-gray-700"> Approximate Delivery Date :  </label>
-        <input type="date" name="approx_date" />
+        <input type="date" name="approx_date" required />
         </div>
 
 

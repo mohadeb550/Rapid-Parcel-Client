@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import useAuth from '../../Hooks/useAuth';
 import useAxiosPublic from '../../Hooks/useAxiosPublic';
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const imageHostingKey = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const imageUploadApi = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`
@@ -13,6 +14,7 @@ export default function AddParcel() {
     const { currentUser } = useAuth()
     const [ total , setTotal ] = useState(0);
     const { register, handleSubmit, formState: {errors}} = useForm();
+    const navigate = useNavigate();
 
 
     const onSubmit = async (data) =>{
@@ -50,6 +52,7 @@ export default function AddParcel() {
         .then(res => {
             if(res.data.insertedId){
                 toast.success('Booking Successful !',{duration:3000});
+              navigate('/dashboard/my-parcels');
             }
         }).catch(error =>{
             toast.error('Something Went Wrong. Please Try Again', {duration:3000})

@@ -2,7 +2,7 @@
 import { Oval } from "react-loader-spinner";
 import { Helmet } from "react-helmet";
 import useAllParcels from "../../Hooks/useAllParcels";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ManageParcel from "../../Components/Shared/MangeParcel";
 import { MdOutlineDateRange } from "react-icons/md";
 
@@ -28,7 +28,11 @@ export default function AllParcels() {
       }
     ]);
 
-    const { allParcels , isLoading } = useAllParcels(state[0].startDate, state[0].endDate, state );
+    const { allParcels , isLoading, refetch } = useAllParcels(state[0].startDate, state[0].endDate );
+
+    useEffect(()=>{
+      refetch()
+    },[state, isOpen, openDate])
 
 
   return (
