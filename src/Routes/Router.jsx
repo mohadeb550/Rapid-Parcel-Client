@@ -16,6 +16,10 @@ import AllUsers from "../Dashboard/Pages/AllUsers";
 import DeliveryList from "../Dashboard/Pages/DeliveryList";
 import Statistics from "../Dashboard/Pages/Statistics";
 import MyReviews from "../Dashboard/Pages/MyReviews";
+import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
+import UserRoute from "./UserRoute";
+import DeliveryManRoute from "./DeliveryManRoute";
 
 
 
@@ -32,18 +36,18 @@ import MyReviews from "../Dashboard/Pages/MyReviews";
     ]},
     {path:'/unauthorized', element : <UnAuthorized/>},
 
-    {path: '/dashboard', element: <Dashboard/> , children: [
+    {path: '/dashboard', element: <PrivateRoute> <Dashboard/> </PrivateRoute> , children: [
 
-      {path: '/dashboard/book-parcel', element: <AddParcel/>},
-      {path: '/dashboard/my-parcels', element: <MyParcels/>},
-      {path: '/dashboard/update-parcel/:id', element: <UpdateParcel/>},
+      {path: '/dashboard/book-parcel', element: <UserRoute> <AddParcel/> </UserRoute> },
+      {path: '/dashboard/my-parcels', element : <UserRoute>  <MyParcels/> </UserRoute>},
+      {path: '/dashboard/update-parcel/:id', element: <UserRoute>  <UpdateParcel/> </UserRoute> },
       {path: '/dashboard/my-profile', element: <MyProfile/>},
-      {path: '/dashboard/all-parcels', element: <AllParcels/>},
-      {path: '/dashboard/all-delivery-man', element: <AllDeliveryMan/>},
-      {path: '/dashboard/all-users', element: <AllUsers/>},
-      {path: '/dashboard/delivery-list', element: <DeliveryList/>},
-      {path: '/dashboard/statistics', element: <Statistics/>},
-      {path: '/dashboard/my-reviews', element: <MyReviews/>},
+      {path: '/dashboard/all-parcels', element: <AdminRoute> <AllParcels/> </AdminRoute> },
+      {path: '/dashboard/all-delivery-man', element: <AdminRoute> <AllDeliveryMan/> </AdminRoute> },
+      {path: '/dashboard/all-users', element: <AdminRoute> <AllUsers/> </AdminRoute> },
+      {path: '/dashboard/delivery-list', element: <DeliveryManRoute> <DeliveryList/> </DeliveryManRoute> },
+      {path: '/dashboard/statistics', element: <AdminRoute>  <Statistics/> </AdminRoute> },
+      {path: '/dashboard/my-reviews', element: <DeliveryManRoute> <MyReviews/> </DeliveryManRoute> },
     ]}
   
   ]);

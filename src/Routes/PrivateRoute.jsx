@@ -1,8 +1,8 @@
 
 import { Navigate, useLocation } from "react-router-dom";
-import toast  from "react-hot-toast";
 import { useContext } from "react";
-import { AuthContext } from "../AuthProvider/AuthProvider";
+import { AuthContext } from "../Provider/AuthProvider";
+
 
 
 export default function PrivateRoute({children}) {
@@ -11,7 +11,6 @@ export default function PrivateRoute({children}) {
   const location = useLocation();
  
   if(!currentUser){
-    toast.error('Please Login!')
     return <Navigate state={ { from: location}} to='/login'/>;
   }
 

@@ -49,7 +49,7 @@ export default function AllParcels() {
    </div>
 
    <div className="flex justify-end items-center my-2 md:my-4">
-      <button onClick={() => setOpenDate(true)} className="bg-black/80 text-xs md:text-base rounded-sm hover:bg-black/70 text-white/80 p-2 font-semibold flex items-center gap-2" > <MdOutlineDateRange size={24}/> Filter By Date Range </button>
+      <button onClick={() => setOpenDate(true)} className="bg-black/5 text-gray-600 text-xs md:text-base rounded-sm hover:bg-black/10  p-2 font-semibold flex items-center gap-2" > <MdOutlineDateRange size={24}/> Filter By Requested Delivery Date </button>
     {openDate && <ManageDateModal openDate={openDate} setOpenDate={setOpenDate} state={state} setState={setState} />}
 
     </div>

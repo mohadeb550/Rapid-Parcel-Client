@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import useAuth from "../Hooks/useAuth.js";
 import { useState } from "react";
 import { Oval } from "react-loader-spinner";
+import useAxiosSecure from "../Hooks/useAxiosSecure.jsx";
 
 
 
@@ -20,6 +21,7 @@ const imageUploadApi = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`
 export default function SignUp() {
   const { register, handleSubmit, formState: {errors}} = useForm();
   const axiosPublic = useAxiosPublic()
+  const axiosSecure = useAxiosSecure()
   const [ loading , setLoading ] = useState(false)
  
 
@@ -56,8 +58,14 @@ export default function SignUp() {
          axiosPublic.post('/users', userInfo)
          .then(res => {
           if(res.data.insertedId){
-            setLoading(false)
+            axiosSecure.post('/jwt', { email: userInfo.email })
+            .then(res => {
+              if(res.data.success){
+             setLoading(false)
+            toast.success('Successfully Account Created!')
             navigate('/');
+              }
+            })
           }
          })
       })

@@ -54,6 +54,7 @@ export default function MyProfile() {
             if(res.data.modifiedCount || res.data.matchedCount){
               setOpen(false);
               toast.success('Profile Updated Successfully', {duration: 3000})
+              location.reload();
             }
           }).catch(error => {
             toast.error('Something Went Wrong, Try Again', {duration: 3000})

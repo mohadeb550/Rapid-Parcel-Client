@@ -8,7 +8,7 @@ export default function Banner() {
      <div  className="hero h-[480px] lg:h-[500px] mb-3 md:mb-8 font-play flex flex-col md:flex-row justify-around items-center bg-[#014BA0]  px-10 md:px-16 md:pb-12" >
 
 <div className="flex-1 h-full w-full pt-6 md:pt-14">
-        <img src="Daco_61330534.png" className=" bg-amber-400 rounded-full h-[200px] md:h-full w-full object-contain" />
+        <img src="Untitled-15.jpg" className=" rounded-full h-[200px] md:h-full w-full object-cover" />
     </div>
     
     <div className=" text-center text-neutral-content flex-1">

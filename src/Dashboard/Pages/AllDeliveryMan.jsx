@@ -56,7 +56,7 @@ export default function AllDeliveryMan() {
               <th
                 scope="col"
                 className="border-r px-6 py-0 md:py-2 lg:py-4 dark:border-neutral-500">
-            Total Review
+            Total Reviews
               </th>
               <th
                 scope="col"
@@ -101,7 +101,7 @@ export default function AllDeliveryMan() {
               </td>
               <td
                 className="whitespace-nowrap font-medium text-sm md:text-lg border-r px-6 py-4 dark:border-neutral-500">
-               <span className="p-2 bg-slate-200 rounded-full">  {man?.totalReviews}</span>
+               <span className="p-2 px-6 bg-slate-200 rounded-full">  {man?.totalReviews}</span>
               </td>
               <td
                 className="whitespace-nowrap font-medium  text-sm md:text-lg border-r px-6 py-4 dark:border-neutral-500">

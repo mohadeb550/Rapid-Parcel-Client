@@ -1,8 +1,6 @@
-import { useQuery } from "@tanstack/react-query";
+
 import { useState } from "react";
-import { NavLink, Outlet, useActionData } from "react-router-dom";
-import useAxiosSecure from "../Hooks/useAxiosSecure";
-import useAuth from "../Hooks/useAuth";
+import { NavLink, Navigate, Outlet, useNavigate } from "react-router-dom";
 import { Oval } from "react-loader-spinner";
 import { BsFillBoxFill } from "react-icons/bs";
 import { FaHome, FaThList, FaUser  } from "react-icons/fa";
@@ -12,34 +10,32 @@ import { PiUsers } from "react-icons/pi";
 import { FaRegStar } from "react-icons/fa6";
 import { TbTruckDelivery } from "react-icons/tb";
 import { Toaster } from "react-hot-toast";
-import useAllParcels from "../Hooks/useAllParcels";
 import useAllDeliveryMan from '../Hooks/useAllDeliveryMan'
 import useAllUsers from '../Hooks/useAllUsers'
 import { FaUserLarge } from "react-icons/fa6";
 import useMyReviews from "../Hooks/useMyReviews";
+import useRole from "../Hooks/useRole";
+import { useEffect } from "react";
 
 export default function Dashboard() {
 
-    const axiosSecure = useAxiosSecure();
-    const { currentUser } = useAuth();
-    const { allParcels } = useAllParcels();
+   const { user , isLoading} = useRole();
+   const navigate = useNavigate();
+
+   useEffect(() => {
+      if(user?.role === 'user')navigate('/dashboard/my-parcels')
+      if(user?.role === 'delivery-man')navigate('/dashboard/delivery-list')
+      if(user?.role === 'admin')navigate('/dashboard/statistics')
+   },[user, navigate]) 
+
     const { allDeliveryMan} = useAllDeliveryMan();
     const { allUsers } = useAllUsers();
     const { allReviews } = useMyReviews();
  
     const [ isOpen, setIsOpen ] = useState(true);
-    const { data:user ={} , isLoading } = useQuery({
-        queryKey: ['role'],
-        queryFn: async () => {
-           const res = await axiosSecure.get(`/user-role/${currentUser.email}`);
-           return res.data;
-        }
-    })
 
   return (
     <>
-
-
 
 <button onClick={() => setIsOpen(!isOpen)}  type="button" className={`inline-flex fixed top-0 left-0 items-center p-1 md:p-2 mt-4 ms-3 text-sm text-gray-200 rounded-md  m-1  z-20 ${!isOpen && 'text-gray-600'}`}>
    <span className="sr-only">Open sidebar</span>
@@ -137,7 +133,7 @@ export default function Dashboard() {
             <NavLink to="/dashboard/all-parcels" className="flex items-center p-2 text-gray-300 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
             <FaThList size={23} className="text-gray-400" />
                <span className="flex-1 ms-3 whitespace-nowrap"> All Parcels</span>
-               <span className="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300"> {allParcels?.length} </span>
+               
             </NavLink>
          </li>
 

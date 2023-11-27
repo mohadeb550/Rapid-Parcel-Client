@@ -4,6 +4,7 @@ import toast  from "react-hot-toast";
 import useAuth from "../Hooks/useAuth";
 import { Helmet } from "react-helmet";
 import SocialLogin from "../Components/Shared/SocialLogin";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 
 
@@ -13,6 +14,7 @@ export default function Login() {
   const { loginUser , currentUser } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
+  const axiosSecure = useAxiosSecure()
 
   const from = location.state?.from?.pathname || '/'; 
 
@@ -27,8 +29,13 @@ export default function Login() {
         loginUser(email, password)
         .then(result => {
 
-            toast.success('Login Successful !',{duration:3000});
-            navigate(from);
+          axiosSecure.post('/jwt', { email: result.user.email })
+            .then(res => {
+              if(res.data.success){
+                toast.success('Login Successful !',{duration:3000});
+                navigate(from);
+              }
+            })
         })
         .catch(error =>  toast.error(error.message))
     }
@@ -56,7 +63,7 @@ export default function Login() {
             <label className="label">
               <span className="">Email</span>
             </label>
-            <input type="email" placeholder="Email" className="input input-bordered bg-transparent  border-white/30" name="email" />
+            <input type="email" placeholder="Email" className="input input-bordered bg-transparent  border-white/60" name="email" />
           </div>
 
 
@@ -64,7 +71,7 @@ export default function Login() {
             <label className="label">
               <span className="">Password</span>
             </label>
-            <input type="text" placeholder="Password" className="input input-bordered bg-transparent border-white/30" name="password" />
+            <input type="text" placeholder="Password" className="input input-bordered bg-transparent border-white/50" name="password" />
           
 
             <div className="mt-3">
