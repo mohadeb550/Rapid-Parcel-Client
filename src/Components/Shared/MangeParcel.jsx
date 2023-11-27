@@ -15,7 +15,8 @@ export default function ManageParcel({ open, setOpen, parcelId}) {
     e.preventDefault();
 
     const deliveryManId = e.target.delivery_man.value;
-    const updateParcel = { status: 'on-the-way' , delivery_man_id: deliveryManId }
+    const approx_date = e.target.approx_date.value;
+    const updateParcel = { status: 'on-the-way' , delivery_man_id: deliveryManId, approx_date }
 
     axiosSecure.patch(`/update/${parcelId}`, updateParcel )
     .then(res => {
@@ -40,11 +41,13 @@ export default function ManageParcel({ open, setOpen, parcelId}) {
        <form className="w-[400px] md:w-[500px] p-7 bg-white" onSubmit={handleSubmit}>
 
        <div className="flex flex-col justify-end my-6 gap-3 px-5 md:px-0">
-        <label className="text-[#014BA0] font-semibold"> Select Delivery Man </label>
+        <label className="text-[#014BA0] font-semibold text-xl"> Select Delivery Man </label>
           <select className=" w-full outline p-2 outline-black/10 rounded-sm outline-1 " name="delivery_man">
           {allDeliveryMan?.map(man =>  <option key={man._id} value={man._id}> {man.name} </option>)}
               
         </select>
+        <label className="text-left text-gray-700"> Approximate Delivery Date :  </label>
+        <input type="date" name="approx_date" />
         </div>
 
 

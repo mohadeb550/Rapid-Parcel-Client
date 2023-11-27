@@ -9,7 +9,7 @@ export default function ReviewCard({review}) {
      <div className="border shadow-sm p-5 max-w-5xl mx-auto rounded-md">
             <div className="flex justify-between items-center gap-3 border-b pb-1">
                 <div className="flex items-center gap-2">
-                    <img className="md:w-28 w-20 object-cover h-20 md:h-28 rounded-full" src="https://i.ibb.co/DRxrXKx/angry-smiley-white-background-vector-illustration-angry-smiley-white-background-114680866.jpg" />
+                    <img className="md:w-28 w-20 object-cover h-20 md:h-28 rounded-full" src={image} />
                     <div>
                         <h4 className="md:text-xl font-semibold "> {name} </h4>
                         <p className="text-gray-500"> {review_date} </p>

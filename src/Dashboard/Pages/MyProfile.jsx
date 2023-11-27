@@ -133,7 +133,7 @@ export default function MyProfile() {
           </div>
         </div>
         <div className="relative">
-          <div className=" w-32 h-32 xl:w-48 xl:h-48 bg-indigo-100 mx-auto rounded-full shadow-2xl absolute inset-x-0 top-0 -mt-24 flex items-center justify-center text-indigo-500">
+          <div className=" w-32 h-32 xl:w-48 xl:h-48 border-2 p-1   mx-auto rounded-full shadow-2xl absolute inset-x-0 top-0 -mt-24 flex items-center justify-center text-indigo-500">
                 <img src={userInfo.image} className="w-full h-full rounded-full object-cover" />
           </div>
         </div>

@@ -162,11 +162,11 @@ export default function AllUsers() {
               </td>
               <td
                 className="whitespace-nowrap font-medium  text-sm md:text-lg border-r px-6 py-4 dark:border-neutral-500">
-                {user?.total_booked}
+                {user?.totalBooking}
               </td>
               <td
                 className="whitespace-nowrap font-medium  text-sm md:text-lg border-r px-6 py-4 dark:border-neutral-500">
-                {user?.total_spent}
+               {user?.my_parcels.reduce((previousValue, currentValue) => previousValue + currentValue?.cost , 0)}
               </td>
               <td
                 className="whitespace-nowrap font-medium  text-sm md:text-lg border-r px-6 py-4 dark:border-neutral-500 capitalize">

@@ -1,24 +1,34 @@
 
-import { Link} from "react-router-dom";
 import { Oval } from "react-loader-spinner";
 import { Helmet } from "react-helmet";
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAllParcels from "../../Hooks/useAllParcels";
-import toast from "react-hot-toast";
-import Swal from "sweetalert2";
 import { useState } from "react";
 import ManageParcel from "../../Components/Shared/MangeParcel";
+import { MdOutlineDateRange } from "react-icons/md";
+
+import 'react-date-range/dist/styles.css'; // main css file
+import 'react-date-range/dist/theme/default.css'; // theme css file
+import { addDays } from 'date-fns';
+import ManageDateModal from "../ManageDateModal";
 
 
 
 export default function AllParcels() {
 
-  const axiosSecure = useAxiosSecure()
   const [ parcelId ,setParcelId ] = useState('');
   const [ isOpen ,setIsOpen ] = useState(false);
-  
-    const { allParcels , refetch, isLoading } = useAllParcels();
+  const [ openDate, setOpenDate ] = useState(false);
 
+    // date 
+    const [state, setState] = useState([
+      {
+        startDate: new Date(),
+        endDate: addDays(new Date(), 30),
+        key: 'selection'
+      }
+    ]);
+
+    const { allParcels , isLoading } = useAllParcels(state[0].startDate, state[0].endDate, state );
 
 
   return (
@@ -29,21 +39,16 @@ export default function AllParcels() {
         <title>  Rapid Parcel / My Parcels </title>
       </Helmet>
 
+
    <div className="flex justify-center items-center mb-6">
    <h2 className="text-2xl md:text-3xl font-extrabold text-[#014BA0] font-play"> All Parcels </h2>
    </div>
 
-   <div className="flex justify-end my-6 gap-3 px-5 md:px-0">
-          <select  className=" w-full max-w-xs outline p-2 outline-black/10 rounded-sm outline-1 ">
-              <option disabled selected> Filter by Status</option>
-               <option value=''> Random </option>
-               <option value='pending'> Pending</option>
-               <option value='on-the-way'> On the way</option>
-               <option value='delivered'> Delivered</option>
-               <option value='returned'> Returned</option>
-               <option value='cancelled'> Cancelled</option>
-        </select>
-        </div>
+   <div className="flex justify-end items-center my-2 md:my-4">
+      <button onClick={() => setOpenDate(true)} className="bg-black/80 text-xs md:text-base rounded-sm hover:bg-black/70 text-white/80 p-2 font-semibold flex items-center gap-2" > <MdOutlineDateRange size={24}/> Filter By Date Range </button>
+    {openDate && <ManageDateModal openDate={openDate} setOpenDate={setOpenDate} state={state} setState={setState} />}
+
+    </div>
 
 
 <div className="flex flex-col font-play">
