@@ -29,7 +29,6 @@ export default function Dashboard() {
    },[user, navigate]) 
 
     const { allDeliveryMan} = useAllDeliveryMan();
-    const { allUsers } = useAllUsers();
     const { allReviews } = useMyReviews();
  
     const [ isOpen, setIsOpen ] = useState(true);
@@ -141,7 +140,7 @@ export default function Dashboard() {
             <NavLink to="/dashboard/all-users" className="flex items-center p-2 text-gray-300 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
             <HiUsers size={23} className="text-gray-400" />
                <span className="flex-1 ms-3 whitespace-nowrap"> All Users </span>
-               <span className="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300"> {allUsers?.length} </span>
+               
             </NavLink>
          </li>
 

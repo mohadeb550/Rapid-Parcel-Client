@@ -19,9 +19,6 @@ export function BarChart() {
     const options = {
         title: "Bookings By DATE",
         chartArea: { width: "50%" },
-        vAxis: {
-          title: "City",
-        }
       };
 
   return (

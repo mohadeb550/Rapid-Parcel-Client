@@ -20,6 +20,8 @@ import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import UserRoute from "./UserRoute";
 import DeliveryManRoute from "./DeliveryManRoute";
+import Payment from "../Dashboard/Payment";
+import PaymentSuccess from "../Dashboard/PaymentSuccess";
 
 
 
@@ -46,8 +48,10 @@ import DeliveryManRoute from "./DeliveryManRoute";
       {path: '/dashboard/all-delivery-man', element: <AdminRoute> <AllDeliveryMan/> </AdminRoute> },
       {path: '/dashboard/all-users', element: <AdminRoute> <AllUsers/> </AdminRoute> },
       {path: '/dashboard/delivery-list', element: <DeliveryManRoute> <DeliveryList/> </DeliveryManRoute> },
-      {path: '/dashboard/statistics', element: <AdminRoute>  <Statistics/> </AdminRoute> },
       {path: '/dashboard/my-reviews', element: <DeliveryManRoute> <MyReviews/> </DeliveryManRoute> },
+      {path: '/dashboard/statistics', element: <AdminRoute>  <Statistics/> </AdminRoute> },
+      {path: '/dashboard/checkout/:id/:cost', element: <UserRoute> <Payment/> </UserRoute> },
+      {path: '/dashboard/payment-successful', element: <UserRoute> <PaymentSuccess/> </UserRoute> },
     ]}
   
   ]);

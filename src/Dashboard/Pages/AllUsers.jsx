@@ -56,7 +56,7 @@ export default function AllUsers() {
         let timerInterval;
         Swal.fire({
           title: "Role Updating...",
-          timer: 2000,
+          timer: 3000,
           timerProgressBar: true,
           didOpen: () => {
             Swal.showLoading();

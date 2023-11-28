@@ -16,10 +16,9 @@ export default function Navbar() {
 
 
   const navLinks = <>
-   <li ><NavLink className={({isActive})=> isActive? ' font-semibold text-amber-400 px-3 py-[3px] rounded ': '' } to='/'> Home </NavLink></li>
-   <li ><NavLink className={({isActive})=> isActive? ' font-semibold text-amber-400 px-3 py-[3px] rounded ': '' } to='/dashboard'> Dashboard </NavLink></li>
-   <li ><NavLink className={({isActive})=> isActive? ' font-semibold text-amber-400 px-3 py-[3px] rounded ': '' } to='/blog'> Blog </NavLink></li>
-  
+   <li ><NavLink className={({isActive})=> isActive? ' font-semibold text-[#014BA0] lg:text-amber-400 px-3 py-[3px] rounded ': '' } to='/'> Home </NavLink></li>
+   <li ><NavLink className={({isActive})=> isActive? ' font-semibold text-[#014BA0] lg:text-amber-400 px-3 py-[3px] rounded ': '' } to='/dashboard'> Dashboard </NavLink></li>
+
   </>
 
     const signOut = () => {
@@ -72,18 +71,15 @@ export default function Navbar() {
         {!currentUser && <Link to='/login'><button className={`font-semibold text-[#014BA0]  text-sm md:text-[16px] p-1 px-3 rounded bg-gray-50 hover:bg-gray-100 `}> Login </button></Link>}
         
         <div className="z-30 lg:w-10 rounded-full p-[2px] mr-2">
-          {currentUser && <img tabIndex={0} src={currentUser?.photoURL || 'https://i.ibb.co/Ttgtb82/pngwing-com-15.png' } className="dropdown w-8 md:w-9 h-8 md:h-9 object-cover cursor-pointer rounded-full border border p-[1px]" />}
+          {currentUser && <img tabIndex={0} src={currentUser?.photoURL || 'https://i.ibb.co/Ttgtb82/pngwing-com-15.png' } className="dropdown w-8 md:w-9 h-8 md:h-9 object-cover cursor-pointer rounded-full border p-[1px]" />}
 
           {currentUser && 
-         <ul tabIndex={0} className={`dropdown-content p-2 shadow bg-base-100 rounded w-52 font-play`}>
-          {currentUser && <li className="font-semibold border p-2 rounded text-black/60 flex items-center gap-2"> {currentUser?.displayName || 'User'}  <img tabIndex={0} src={currentUser?.photoURL || 'https://i.ibb.co/Ttgtb82/pngwing-com-15.png' } className="w-8 h-8 object-cover rounded-full border" /></li>}
+         <ul tabIndex={0} className={`dropdown-content p-2 shadow bg-base-200 rounded w-52 font-play`}>
+          {currentUser && <li className="font-semibold  p-2 border-b rounded text-black/60 flex items-center gap-2"> {currentUser?.displayName || 'User'}  <img tabIndex={0} src={currentUser?.photoURL || 'https://i.ibb.co/Ttgtb82/pngwing-com-15.png' } className="w-8 h-8 object-cover rounded-full border border-gray-300 p-[1px]" /></li>}
             
-         <Link to='/my-added-foods'> <li className="font-semibold border p-2 transition-all rounded  hover:bg-slate-500/10 text-lime-600/90 text-sm flex items-center gap-2 "> My Added Foods  </li></Link>
-
-         <Link to='/add-food'> <li className="font-semibold border p-2 transition-all rounded  hover:bg-slate-500/10 text-lime-600/90 text-sm flex items-center gap-2 "> Add Food  </li></Link>
-
-         <Link to='/ordered-foods'> <li className="font-semibold border p-2 transition-all rounded hover:bg-slate-500/10 text-lime-600/90 text-sm flex items-center gap-2 "> My Ordered Foods  </li></Link>
-         <li className="cursor-pointer transition-all p-1 rounded hover:underline" onClick={()=> signOut() }> Log out</li> 
+         
+         <Link to='/dashboard'> <li className="font-semibold  p-2 transition-all rounded hover:bg-slate-500/10 text-gray-500 text-sm flex items-center gap-2 "> Dashboard  </li></Link>
+         <li className="cursor-pointer transition-all text-gray-600 p-1 rounded hover:underline" onClick={()=> signOut() }> Log out</li> 
 
         </ul>}
         </div>

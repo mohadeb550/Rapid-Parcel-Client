@@ -4,6 +4,8 @@ import useAuth from '../../Hooks/useAuth';
 import useAxiosPublic from '../../Hooks/useAxiosPublic';
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { Oval } from "react-loader-spinner";
+
 
 const imageHostingKey = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const imageUploadApi = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`
@@ -15,9 +17,11 @@ export default function AddParcel() {
     const [ total , setTotal ] = useState(0);
     const { register, handleSubmit, formState: {errors}} = useForm();
     const navigate = useNavigate();
+    const [ loading , setLoading ] = useState(false);
 
 
     const onSubmit = async (data) =>{
+      setLoading(true)
 
         const imageData = { image: data.product_img[0] };
 
@@ -52,6 +56,7 @@ export default function AddParcel() {
         .then(res => {
             if(res.data.insertedId){
                 toast.success('Booking Successful !',{duration:3000});
+                setLoading(false)
               navigate('/dashboard/my-parcels');
             }
         }).catch(error =>{
@@ -73,7 +78,7 @@ export default function AddParcel() {
     }
 
   return (
-    <section>
+    <section className="max-w-4xl mx-auto xl:border rounded-md xl:shadow-lg xl:border-blue-600/10 py-5 md:py-10">
 
 <div className="text-center lg:text-left mb-8">
         <h1 className="text-3xl lg:text-[40px] text-[#014BA0]  px-24 py-3 font-bold text-center font-play"> Book A Parcel</h1>
@@ -156,7 +161,19 @@ export default function AddParcel() {
   </div>
 
 
-  <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Book</button>
+  <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"> {loading? <Oval
+  height={28}
+  width={28}
+  color="#FEFEFD"
+  wrapperStyle={{}}
+  wrapperClass=""
+  visible={true}
+  ariaLabel='oval-loading'
+  secondaryColor="#1C427D"
+  strokeWidth={4}
+  strokeWidthSecondary={3}
+
+/> : 'Book '} </button>
 </form>
 
     </section>

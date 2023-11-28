@@ -51,7 +51,7 @@ export default function UpdateParcel () {
 
   return (
     <>
- <section>
+ <section className='max-w-4xl mx-auto xl:border rounded-md xl:shadow-lg xl:border-blue-600/10 py-5 md:py-10'>
 
 <div className="text-center lg:text-left mb-8">
         <h1 className="text-3xl lg:text-[34px] text-[#014BA0]  px-24 py-3 font-bold text-center font-play"> Update Parcel Information</h1>

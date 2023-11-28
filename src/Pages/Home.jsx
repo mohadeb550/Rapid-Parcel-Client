@@ -4,6 +4,7 @@ import OurFeatures from "../Components/OurFeatures";
 import TopDeliveryMen from "../Components/TopDeliveryMen";
 
 
+
 export default function Home() {
 
   return (
@@ -15,6 +16,8 @@ export default function Home() {
     <OurFeatures/>
     <Insights/>
     <TopDeliveryMen/>
+    <div className="relative z-40">
+   </div>
     </section>
     </>
   )

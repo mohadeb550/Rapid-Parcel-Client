@@ -15,6 +15,7 @@ export default function MyProfile() {
     const [ open ,setOpen ] = useState(false);
     const axiosPublic = useAxiosPublic();
 
+
     const { data: userInfo = {} ,refetch} = useQuery({
         queryKey: ['single-user'],
         queryFn : async () => {
@@ -26,17 +27,22 @@ export default function MyProfile() {
 
 
       const handleSubmit = async (e) => {
+
+        let newImage = currentUser?.photoURL;
+
         e.preventDefault()
           const form = e.target;
           const rawImage = form.image.files[0];
           const imageData = { image: rawImage}
 
-        const res = await axiosPublic.post(imageUploadApi, imageData , {
-          headers: {
-            'content-type' : 'multipart/form-data'
-          }
-        })
-        const newImage =  res.data.data.display_url;
+        if(rawImage){
+          const res = await axiosPublic.post(imageUploadApi, imageData , {
+            headers: {
+              'content-type' : 'multipart/form-data'
+            }
+          });
+           newImage =  res.data.data.display_url;
+        }
 
         // update user info in firebase 
         const result = await updateUserProfile(form.name.value, newImage)
@@ -50,11 +56,11 @@ export default function MyProfile() {
 
     axiosSecure.patch(`/users/${currentUser.email}`, updatedInfo)
           .then(res => {
-            console.log(res.data)
+      
             if(res.data.modifiedCount || res.data.matchedCount){
               setOpen(false);
               toast.success('Profile Updated Successfully', {duration: 3000})
-              location.reload();
+             refetch();
             }
           }).catch(error => {
             toast.error('Something Went Wrong, Try Again', {duration: 3000})
@@ -141,12 +147,12 @@ export default function MyProfile() {
     
         <div className="space-x-8 flex justify-between mt-10 md:mt-0 md:justify-center">
     <button
-      className="text-white py-2 px-4 uppercase rounded bg-blue-400 hover:bg-blue-500 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
+      className="text-white text-sm xl:text-base py-2 px-4 uppercase rounded bg-blue-400 hover:bg-blue-500 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
     >
       Connect
     </button>
         <button
-      className="text-white py-2 px-4 uppercase rounded bg-gray-700 hover:bg-gray-800 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
+      className="text-white text-sm xl:text-base py-2 px-4 uppercase rounded bg-gray-700 hover:bg-gray-800 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
     >
       Message
     </button>

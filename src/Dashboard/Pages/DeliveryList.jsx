@@ -1,12 +1,13 @@
 
 import {  useQuery } from "@tanstack/react-query";
-import { Link} from "react-router-dom";
 import { Oval } from "react-loader-spinner";
 import { Helmet } from "react-helmet";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import useAuth from "../../Hooks/useAuth";
+import { useState } from "react";
+import ManageMap from "../ManageMap";
 
 
 
@@ -14,6 +15,9 @@ export default function DeliveryList() {
 
   const { currentUser } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const [ latitude, setLatitude ] = useState('');
+  const [ longitude, setLongitude ] = useState('');
+  const [ isOpen ,setIsOpen ] = useState(false);
 
 
   const { data: deliveryLIst = [] , isLoading, refetch} = useQuery({
@@ -217,10 +221,10 @@ export default function DeliveryList() {
               </td>
               <td className="whitespace-nowrap font-medium  text-sm md:text-lg border-r px-6 py-4 dark:border-neutral-500">
              
-             <Link to={`/dashboard/update-parcel/${parcel._id}`}>
-             <button className={`bg-gray-200 p-1 px-2 md:py-2 md:px-4 text-gray-600 rounded font-semibold transition-all hover:bg-sky-700 hover:text-gray-200 text-[12px] md:text-base disabled:bg-gray-200 disabled:text-gray-400`}  > 
+            
+             <button onClick={() => {setLatitude(parcel.address_lat); setLongitude(parcel.address_long); setIsOpen(true)} } className={`bg-gray-200 p-1 px-2 md:py-2 md:px-4 text-gray-600 rounded font-semibold transition-all hover:bg-sky-700 hover:text-gray-200 text-[12px] md:text-base disabled:bg-gray-200 disabled:text-gray-400`}  > 
              View Location </button>
-             </Link>
+             {isOpen && <ManageMap  open={isOpen} setOpen={setIsOpen} latitude={latitude} longitude={longitude} />}
     
                </td>
               

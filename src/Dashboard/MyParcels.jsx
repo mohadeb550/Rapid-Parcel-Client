@@ -211,7 +211,7 @@ export default function MyParcels() {
               <td className="whitespace-nowrap font-medium text-center  text-sm md:text-lg border-r px-6 py-4 dark:border-neutral-500">
             {
                 parcel.payment === 'due'? 
-                <Link to={`/update-food/`}>
+                <Link to={`/dashboard/checkout/${parcel._id}/${parcel.cost}`}>
                 <button className="bg-green-600 p-1 px-2 md:py-2 md:px-4 text-white rounded font-semibold transition-all hover:bg-green-700 text-[12px] md:text-base disabled:bg-gray-200 disabled:text-gray-400 " disabled={parcel.status === 'cancelled'} > 
                Pay </button>
                </Link> : 'Paid'

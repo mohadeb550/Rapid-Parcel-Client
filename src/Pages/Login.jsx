@@ -11,7 +11,7 @@ import useAxiosSecure from "../Hooks/useAxiosSecure";
 export default function Login() {
 
 
-  const { loginUser , currentUser } = useAuth();
+  const { loginUser  } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const axiosSecure = useAxiosSecure()
