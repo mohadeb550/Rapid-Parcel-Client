@@ -48,7 +48,7 @@ export default function ManageParcel({ open, setOpen, parcelId}) {
               
         </select>
         <label className="text-left text-gray-700"> Approximate Delivery Date :  </label>
-        <input type="date" name="approx_date" required />
+        <input type="date" className="border p-1" name="approx_date" required />
         </div>
 
 

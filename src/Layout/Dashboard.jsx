@@ -11,21 +11,23 @@ import { FaRegStar } from "react-icons/fa6";
 import { TbTruckDelivery } from "react-icons/tb";
 import { Toaster } from "react-hot-toast";
 import useAllDeliveryMan from '../Hooks/useAllDeliveryMan'
-import useAllUsers from '../Hooks/useAllUsers'
 import { FaUserLarge } from "react-icons/fa6";
 import useMyReviews from "../Hooks/useMyReviews";
 import useRole from "../Hooks/useRole";
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom/dist";
 
 export default function Dashboard() {
 
    const { user , isLoading} = useRole();
    const navigate = useNavigate();
+   const location  = useLocation();
+ 
 
    useEffect(() => {
-      if(user?.role === 'user')navigate('/dashboard/my-parcels')
-      if(user?.role === 'delivery-man')navigate('/dashboard/delivery-list')
-      if(user?.role === 'admin')navigate('/dashboard/statistics')
+      if(user?.role === 'user' && location?.state?.from?.location?.pathname === '/' )navigate('/dashboard/my-parcels')
+      if(user?.role === 'delivery-man' && location?.state?.from?.location?.pathname === '/')navigate('/dashboard/delivery-list')
+      if(user?.role === 'admin' && location?.state?.from?.location?.pathname === '/')navigate('/dashboard/statistics')
    },[user, navigate]) 
 
     const { allDeliveryMan} = useAllDeliveryMan();
@@ -69,15 +71,15 @@ export default function Dashboard() {
       <ul className="space-y-2 font-medium">
         
         <li>
-           <NavLink to="/dashboard/book-parcel" className="flex items-center p-2 text-gray-300 rounded-lg dark:text-white hover:bg-gray-900 dark:hover:bg-gray-700 group">
+           <NavLink to="/dashboard/book-parcel" className={({isActive})=> isActive? ' flex items-center p-2 t bg-gray-900 text-gray-300 rounded-lg dark:text-white  ': 'flex items-center p-2 text-gray-300 rounded-lg dark:text-white  ' }>
            <BsFillBoxFill size={22} className="text-gray-400" />
               <span className="flex-1 ms-3 whitespace-nowrap"> Book A Parcel</span>
              
            </NavLink>
         </li>
         <li>
-           <NavLink to="/dashboard/my-parcels" className="flex items-center p-2 text-gray-300 rounded-lg dark:text-white hover:bg-gray-900 dark:hover:bg-gray-700 group">
-           <svg className="flex-shrink-0 w-5 h-5 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+           <NavLink to="/dashboard/my-parcels" className={({isActive})=> isActive? ' flex items-center p-2 t bg-gray-900 text-gray-300 rounded-lg dark:text-white  ': 'flex items-center p-2 text-gray-300 rounded-lg dark:text-white  ' }>
+           <svg className="flex-shrink-0 w-5 h-5 text-gray-400 transition duration-75 dark:text-gray-400  dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
                  <path d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z"/>
               </svg>
               <span className="flex-1 ms-3 whitespace-nowrap">My Parcels</span>
@@ -95,7 +97,7 @@ export default function Dashboard() {
          
          
     <li>
-       <NavLink to="/dashboard/delivery-list" className="flex items-center p-2 text-gray-300 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+       <NavLink to="/dashboard/delivery-list" className={({isActive})=> isActive? ' flex items-center p-2 t bg-gray-900 text-gray-300 rounded-lg dark:text-white  ': 'flex items-center p-2 text-gray-300 rounded-lg dark:text-white  ' }>
        <TbTruckDelivery size={22} className="text-gray-400" />
           <span className="flex-1 ms-3 whitespace-nowrap"> My Delivery List</span>
         
@@ -103,7 +105,7 @@ export default function Dashboard() {
     </li>
 
     <li>
-       <NavLink to="/dashboard/my-reviews" className="flex items-center p-2 text-gray-300 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+       <NavLink to="/dashboard/my-reviews" className={({isActive})=> isActive? ' flex items-center p-2 t bg-gray-900 text-gray-300 rounded-lg dark:text-white  ': 'flex items-center p-2 text-gray-300 rounded-lg dark:text-white  ' }>
        <FaRegStar size={22} className="text-gray-400" />
           <span className="flex-1 ms-3 whitespace-nowrap"> My Reviews </span>
           <span className="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300"> {allReviews?.length} </span>
@@ -120,16 +122,16 @@ export default function Dashboard() {
         user.role === 'admin' &&
         <ul className="space-y-2 font-medium">
          
-         
+       
          <li>
-            <NavLink to="/dashboard/statistics" className="flex items-center p-2 text-gray-300 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+            <NavLink to="/dashboard/statistics"   className={({isActive})=> isActive? ' flex items-center p-2 text-gray-300 bg-gray-900 rounded-lg dark:text-white  dark:hover:bg-gray-700 group ': 'flex items-center p-2 text-gray-300 rounded-lg dark:text-white  dark:hover:bg-gray-700 group' }>
             <SiSimpleanalytics size={23} className="text-gray-400" />
                <span className="flex-1 ms-3 whitespace-nowrap"> Statistics </span>
                
             </NavLink>
          </li>
          <li>
-            <NavLink to="/dashboard/all-parcels" className="flex items-center p-2 text-gray-300 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+            <NavLink to="/dashboard/all-parcels"   className={({isActive})=> isActive? ' flex items-center p-2 text-gray-300 bg-gray-900 rounded-lg dark:text-white  dark:hover:bg-gray-700 group ': 'flex items-center p-2 text-gray-300 rounded-lg dark:text-white  dark:hover:bg-gray-700 group' }>
             <FaThList size={23} className="text-gray-400" />
                <span className="flex-1 ms-3 whitespace-nowrap"> All Parcels</span>
                
@@ -137,7 +139,7 @@ export default function Dashboard() {
          </li>
 
          <li>
-            <NavLink to="/dashboard/all-users" className="flex items-center p-2 text-gray-300 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+            <NavLink to="/dashboard/all-users"   className={({isActive})=> isActive? ' flex items-center p-2 text-gray-300 bg-gray-900 rounded-lg dark:text-white  dark:hover:bg-gray-700 group ': 'flex items-center p-2 text-gray-300 rounded-lg dark:text-white  dark:hover:bg-gray-700 group' }>
             <HiUsers size={23} className="text-gray-400" />
                <span className="flex-1 ms-3 whitespace-nowrap"> All Users </span>
                
@@ -145,8 +147,9 @@ export default function Dashboard() {
          </li>
 
          <li>
-            <NavLink to="/dashboard/all-delivery-man" className="flex items-center p-2 text-gray-300 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+            <NavLink to="/dashboard/all-delivery-man"   className={({isActive})=> isActive? ' flex items-center p-2 t bg-gray-900 text-gray-300 rounded-lg dark:text-white  ': 'flex items-center p-2 text-gray-300 rounded-lg dark:text-white  ' }>
             <PiUsers size={23} className="text-gray-400" />
+            
                <span className="flex-1 ms-3 whitespace-nowrap"> All Delivery Man</span>
                <span className="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300"> {allDeliveryMan.length} </span>
             </NavLink>
@@ -158,14 +161,14 @@ export default function Dashboard() {
     
     <ul className="border-t border-white/50 py-4 mt-2">
     <li>
-           <NavLink to="/dashboard/my-profile" className="flex items-center p-2 text-gray-300 rounded-lg dark:text-white hover:bg-gray-900 dark:hover:bg-gray-700 group">
+           <NavLink to="/dashboard/my-profile" className={({isActive})=> isActive? ' flex items-center p-2 t bg-gray-900 text-gray-300 rounded-lg dark:text-white  ': 'flex items-center p-2 text-gray-300 rounded-lg dark:text-white  ' }>
               <FaUserLarge size={20} className="text-gray-400" />
               <span className="flex-1 ms-3 whitespace-nowrap"> My Profile </span>
               
            </NavLink>
         </li>
     <li>
-           <NavLink to="/" className="flex items-center p-2 text-gray-300 rounded-lg dark:text-white hover:bg-gray-900 dark:hover:bg-gray-700 group">
+           <NavLink to="/" className={({isActive})=> isActive? ' flex items-center p-2 t bg-gray-900 text-gray-300 rounded-lg dark:text-white  ': 'flex items-center p-2 text-gray-300 rounded-lg dark:text-white' }>
               <FaHome size={23} className="text-gray-400" />
               <span className="flex-1 ms-3 whitespace-nowrap"> Home </span>
               

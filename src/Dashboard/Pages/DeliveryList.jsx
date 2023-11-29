@@ -1,6 +1,5 @@
 
 import {  useQuery } from "@tanstack/react-query";
-import { Oval } from "react-loader-spinner";
 import { Helmet } from "react-helmet";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
@@ -8,6 +7,7 @@ import Swal from "sweetalert2";
 import useAuth from "../../Hooks/useAuth";
 import { useState } from "react";
 import ManageMap from "../ManageMap";
+import { RotatingTriangles } from "react-loader-spinner";
 
 
 
@@ -79,10 +79,12 @@ export default function DeliveryList() {
 
       axiosSecure.patch(`/update/${id}`, updatedParcel)
     .then(res => {
+   
       if(res.data.modifiedCount){
         
         axiosSecure.patch(`/update-total-delivered/${currentUser.email}`)
         .then(res => {
+      
           if(res.data.modifiedCount){
             Swal.fire({
               title: "Delivered!",
@@ -172,19 +174,14 @@ export default function DeliveryList() {
           </thead>
           <tbody className="relative">
 
-          {isLoading && <Oval
-      height={50}
-      width={50}
-      color="rgb(101,163,13)"
-      wrapperStyle={{}}
-      wrapperClass="absolute top-[6%] md:top-[8%] left-2/4 mt-10"
-      visible={true}
-      ariaLabel='oval-loading'
-      secondaryColor="rgb(140,183,77)"
-      strokeWidth={2}
-      strokeWidthSecondary={2}
-    
-    />}
+          {isLoading && <RotatingTriangles
+  visible={true}
+  height="80"
+  width="80"
+  ariaLabel="rotating-triangels-loading"
+  wrapperStyle={{}}
+  wrapperClass="absolute top-[6%] md:top-[8%] left-2/4 mt-10"
+/>}
           
           {deliveryLIst?.map(parcel =>  <tr key={parcel._id} className="border-b dark:border-neutral-500">
               <td

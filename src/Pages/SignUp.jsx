@@ -57,7 +57,8 @@ export default function SignUp() {
           // now save the user in database 
          axiosPublic.post('/users', userInfo)
          .then(res => {
-          if(res.data.insertedId){
+          console.log(res)
+          if(res.data._id){
             axiosSecure.post('/jwt', { email: userInfo.email })
             .then(res => {
               if(res.data.success){

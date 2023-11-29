@@ -1,5 +1,4 @@
 
-import { Oval } from "react-loader-spinner";
 import { Helmet } from "react-helmet";
 import useAllUsers from "../../Hooks/useAllUsers";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
@@ -7,6 +6,7 @@ import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
 import Pagination from "../Pagination";
+import { RotatingTriangles } from "react-loader-spinner";
 
 
 
@@ -133,19 +133,14 @@ export default function AllUsers() {
           </thead>
           <tbody className="relative">
 
-          {isLoading && <Oval
-      height={50}
-      width={50}
-      color="rgb(101,163,13)"
-      wrapperStyle={{}}
-      wrapperClass="absolute top-[6%] md:top-[8%] left-2/4 mt-10"
-      visible={true}
-      ariaLabel='oval-loading'
-      secondaryColor="rgb(140,183,77)"
-      strokeWidth={2}
-      strokeWidthSecondary={2}
-    
-    />}
+          {isLoading && <RotatingTriangles
+  visible={true}
+  height="80"
+  width="80"
+  ariaLabel="rotating-triangels-loading"
+  wrapperStyle={{}}
+  wrapperClass="absolute top-[6%] md:top-[8%] left-2/4 mt-10"
+/>}
           
           {allUsers?.map(user =>  <tr key={user._id} className="border-b dark:border-neutral-500">
               <td

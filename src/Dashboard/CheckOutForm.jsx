@@ -79,7 +79,7 @@ export default function CheckoutForm() {
               }
   
              const res = await axiosSecure.post('/payments', payment);
-            if(res.data.insertedId){
+            if(res.data._id){
 
        const updatedParcel = {  payment :'paid' }
 
@@ -101,7 +101,7 @@ export default function CheckoutForm() {
     <section>
 
         <form onSubmit={handleSubmit}>
-        <h2 className="uppercase text-gray-400 md:text-[17px] font-semibold text-center my-6 "> Total :  ${cost}</h2>
+        <h2 className="uppercase text-gray-400 md:text-[17px] font-semibold text-center my-6 "> Total : {cost} Taka </h2>
             <CardElement options={{
           style: {
             base: {

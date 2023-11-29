@@ -71,9 +71,9 @@ export default function ManageReview({ open, setOpen, deliveryManId}) {
 </div>
 <div className="flex flex-col ">
     <label> Feedback Title</label>
-    <textarea name="feedback_title" className="outline-none rounded-md my-2" rows={1} />
+    <textarea name="feedback_title" className="outline-none border rounded my-2" rows={1} />
     <label> Feedback Description  </label>
-    <textarea name="feedback_description" className="outline-none rounded-md my-2" />
+    <textarea name="feedback_description" className="outline-none border rounded my-2" />
 </div>
         <div className="my-2 text-3xl text-[#014BA0]">
         <Rating

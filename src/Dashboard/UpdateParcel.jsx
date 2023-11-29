@@ -39,6 +39,7 @@ export default function UpdateParcel () {
   
       axiosSecure.patch(`/update/${parcel._id}`, updatedParcel)
       .then(res => {
+     
         if(res.data.modifiedCount || res.data.matchedCount){
           toast.success('Parcel Updated Successfully', {duration: 3000})
         }

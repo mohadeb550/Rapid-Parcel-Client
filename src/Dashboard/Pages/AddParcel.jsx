@@ -54,7 +54,8 @@ export default function AddParcel() {
 
         axiosPublic.post('/booking', parcel)
         .then(res => {
-            if(res.data.insertedId){
+          console.log(res)
+            if(res.data._id){
                 toast.success('Booking Successful !',{duration:3000});
                 setLoading(false)
               navigate('/dashboard/my-parcels');

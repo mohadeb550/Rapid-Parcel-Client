@@ -1,5 +1,4 @@
 
-import { Oval } from "react-loader-spinner";
 import { Helmet } from "react-helmet";
 import useAllParcels from "../../Hooks/useAllParcels";
 import { useEffect, useState } from "react";
@@ -10,6 +9,7 @@ import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { addDays } from 'date-fns';
 import ManageDateModal from "../ManageDateModal";
+import { RotatingTriangles } from "react-loader-spinner";
 
 
 
@@ -36,7 +36,7 @@ export default function AllParcels() {
 
 
   return (
-   <section className="max-w-[1300px] mx-auto px-4 my-2 md:my-6 lg:my-10 mb-10"> 
+   <section className="max-w-[1300px] mx-auto px-4 my-2 md:my-6 lg:my-10 mb-10 font-prompt"> 
 
    
       <Helmet>
@@ -45,7 +45,7 @@ export default function AllParcels() {
 
 
    <div className="flex justify-center items-center mb-6">
-   <h2 className="text-2xl md:text-3xl font-extrabold text-[#014BA0] font-play"> All Parcels </h2>
+   <h2 className="text-2xl md:text-3xl font-prompt font-semibold text-[#014BA0] "> All Parcels </h2>
    </div>
 
    <div className="flex justify-end items-center my-2 md:my-4">
@@ -104,19 +104,14 @@ export default function AllParcels() {
           </thead>
           <tbody className="relative">
 
-          {isLoading && <Oval
-      height={50}
-      width={50}
-      color="rgb(101,163,13)"
-      wrapperStyle={{}}
-      wrapperClass="absolute top-[6%] md:top-[8%] left-2/4 mt-10"
-      visible={true}
-      ariaLabel='oval-loading'
-      secondaryColor="rgb(140,183,77)"
-      strokeWidth={2}
-      strokeWidthSecondary={2}
-    
-    />}
+          {isLoading && <RotatingTriangles
+  visible={true}
+  height="80"
+  width="80"
+  ariaLabel="rotating-triangels-loading"
+  wrapperStyle={{}}
+  wrapperClass="absolute top-[6%] md:top-[8%] left-2/4 mt-10"
+/>}
           
           {allParcels?.map(parcel =>  <tr key={parcel._id} className="border-b dark:border-neutral-500">
               <td

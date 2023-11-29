@@ -4,6 +4,7 @@ import toast from "react-hot-toast"
 import axios from "axios";
 import useAuth from "../../Hooks/useAuth";
 import { IoNotificationsSharp } from "react-icons/io5";
+import { useLocation } from "react-router-dom/dist";
 
 
 
@@ -13,11 +14,13 @@ export default function Navbar() {
   
   const { currentUser , logOut } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
 
   const navLinks = <>
    <li ><NavLink className={({isActive})=> isActive? ' font-semibold text-[#014BA0] lg:text-amber-400 px-3 py-[3px] rounded ': '' } to='/'> Home </NavLink></li>
-   <li ><NavLink className={({isActive})=> isActive? ' font-semibold text-[#014BA0] lg:text-amber-400 px-3 py-[3px] rounded ': '' } to='/dashboard'> Dashboard </NavLink></li>
+   <li ><NavLink className={({isActive})=> isActive? ' font-semibold text-[#014BA0] lg:text-amber-400 px-3 py-[3px] rounded ': '' } to='/dashboard' state={{ from : {location}}} > Dashboard </NavLink></li>
+   <li ><NavLink className={({isActive})=> isActive? ' font-semibold text-[#014BA0] lg:text-amber-400 px-3 py-[3px] rounded ': '' } to='/sign-up' state={{ from : {location}}} > Sign Up </NavLink></li>
 
   </>
 
@@ -25,13 +28,7 @@ export default function Navbar() {
       logOut()
       .then(result => {
         toast.success('Logged Out !')
-  
-         axios.get('https://savorspot-cafe-server.vercel.app/logout', {withCredentials : true})
-         .then(data => {
-          if(data.data.success){
             navigate('/');  
-          }
-         }) 
       })
       .catch(error => {
         toast.error('Something went wrong')
@@ -53,7 +50,7 @@ export default function Navbar() {
     </div>
     <div className="flex items-center gap-1">
     <img src='/1471-fotor-bg-remover-2023112402346.png' className="w-9 md:w-12 lg:w-[73px]"/>
-    <p className="text-[18px]  md:text-xl lg:text-2xl text-amber-400 font-racing"> Rapid <span className="text-white/90">Parcel</span> </p>
+    <p className="text-[18px]  md:text-xl lg:text-2xl text-amber-400 font-racing whitespace-nowrap "> Rapid <span className="text-white/90">Parcel</span> </p>
     </div>
   </div>
   <div className="navbar-center hidden lg:flex">

@@ -2,7 +2,7 @@
 import {  useQuery } from "@tanstack/react-query";
 import useAuth from "../Hooks/useAuth";
 import { Link} from "react-router-dom";
-import { Oval } from "react-loader-spinner";
+import { RotatingTriangles} from "react-loader-spinner";
 import { Helmet } from "react-helmet";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
@@ -139,20 +139,15 @@ export default function MyParcels() {
             </tr>
           </thead>
           <tbody className="relative">
-
-          {isLoading && <Oval
-      height={50}
-      width={50}
-      color="rgb(101,163,13)"
-      wrapperStyle={{}}
-      wrapperClass="absolute top-[6%] md:top-[8%] left-2/4 mt-10"
-      visible={true}
-      ariaLabel='oval-loading'
-      secondaryColor="rgb(140,183,77)"
-      strokeWidth={2}
-      strokeWidthSecondary={2}
-    
-    />}
+          
+          {isLoading && <RotatingTriangles
+  visible={true}
+  height="80"
+  width="80"
+  ariaLabel="rotating-triangels-loading"
+  wrapperStyle={{}}
+  wrapperClass="absolute top-[6%] md:top-[8%] left-2/4 mt-10"
+/>}
           
           {parcels?.map(parcel =>  <tr key={parcel._id} className="border-b dark:border-neutral-500">
               <td

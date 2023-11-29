@@ -8,8 +8,8 @@ const Footer = () => {
                 <div className="flex flex-col flex-shrink-0">
                     <div>
                     <div className="flex items-center gap-1">
-                     <img src='/1471-fotor-bg-remover-2023112402346.png' className="w-9 md:w-12 lg:w-16"/>
-                        <p className="text-[18px]  md:text-xl lg:text-2xl text-amber-500 font-racing"> Rapid<span className="text-[#014BA0]">Parcel</span> </p>
+                     <img src='/1471-fotor-bg-remover-2023112402346.png' className="w-12 md:w-12 lg:w-20"/>
+                        <p className="text-[20px]  md:text-xl lg:text-[28px] text-amber-500 font-racing"> Rapid<span className="text-[#014BA0]">Parcel</span> </p>
                         </div>
                     </div>
                     <p className="text-sm leading-none text-gray-800 mt-4">Copyright © 2023 RapidParcel</p>

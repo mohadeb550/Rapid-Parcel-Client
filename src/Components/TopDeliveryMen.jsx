@@ -10,7 +10,7 @@ export default function TopDeliveryMen() {
 
     return (
       <section className="my-24 mt-32 lg:my-44">
-       <h1 className="text-[30px] md:text-3xl lg:text-[40px] text-[#014BA0] text-center font-racing mb-3 md:mb-6 " > Meet Our Top Delivery Team </h1>
+       <h1 className="text-[25px] md:text-3xl lg:text-[35px] font-bold italic text-[#014BA0] text-center font-prompt mb-3 md:mb-6 " > Meet Our Top Delivery Team </h1>
        <p className="text-center mb-10 text-gray-500 max-w-5xl mx-auto px-4 font-play">
        At Rapid Parcel, our commitment to exceptional service goes hand in hand with the dedication of our top delivery professionals.</p>
 
@@ -30,13 +30,13 @@ export default function TopDeliveryMen() {
       </h5>
 
        <h5
-      className="mb-4 text-[20px] flex items-center justify-center gap-2 font-semibold leading-tight text-amber-500 dark:text-neutral-50 text-center">
-   <span className="text-4xl text-amber-400 font-racing"> <CountUp end={topMan?.total_delivered} duration={6} /></span> Parcel Delivered!
+      className="mb-4 text-[20px] flex items-center justify-center gap-2 font-semibold leading-tight text-gray-300 italic dark:text-neutral-50 text-center font-prompt ">
+   <span className="text-4xl text-amber-400 font-racing not-italic"> <CountUp end={topMan?.total_delivered} duration={6} /></span> Parcel Delivered!
     </h5>
 
     <div className="flex gap-3 items-center justify-center">
-      <span className='text-amber-400 text-xl'> {topMan?.avg_review}</span>
-    <Rating className="text-neutral-300" initialRating={topMan.avg_review} emptySymbol={<BsStar />} fullSymbol={<BsStarFill />} />
+      <span className='text-orange-400 text-xl font-prompt'> {topMan?.avg_review}</span>
+    <Rating className="text-orange-400" initialRating={topMan.avg_review} emptySymbol={<BsStar />} fullSymbol={<BsStarFill />} />
     </div>
     
   

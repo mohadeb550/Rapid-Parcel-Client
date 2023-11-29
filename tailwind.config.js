@@ -10,11 +10,13 @@ export default {
       titan: ['Titan One', 'sans-serif'],
       serif: ['Merriweather', 'serif'],
       racing: ['Racing Sans One', 'sans-serif'],
+      prompt: ['Prompt', 'sans-serif'],
     },
     extend: {
       darkMode: 'class',
     },
   },
-  plugins: [require("daisyui"),  require('flowbite/plugin'),],
+  plugins: [require("daisyui")],
 }
 
+// require('flowbite/plugin'),
