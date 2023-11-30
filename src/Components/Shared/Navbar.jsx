@@ -75,7 +75,7 @@ export default function Navbar() {
           {currentUser && <li className="font-semibold  p-2 border-b rounded text-black/60 flex items-center gap-2"> {currentUser?.displayName || 'User'}  <img tabIndex={0} src={currentUser?.photoURL || 'https://i.ibb.co/Ttgtb82/pngwing-com-15.png' } className="w-8 h-8 object-cover rounded-full border border-gray-300 p-[1px]" /></li>}
             
          
-         <Link to='/dashboard'> <li className="font-semibold  p-2 transition-all rounded hover:bg-slate-500/10 text-gray-500 text-sm flex items-center gap-2 "> Dashboard  </li></Link>
+         <Link to='/dashboard' state={{ from : {location}}}> <li className="font-semibold  p-2 transition-all rounded hover:bg-slate-500/10 text-gray-500 text-sm flex items-center gap-2 "> Dashboard  </li></Link>
          <li className="cursor-pointer transition-all text-gray-600 p-1 rounded hover:underline" onClick={()=> signOut() }> Log out</li> 
 
         </ul>}

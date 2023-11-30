@@ -4,7 +4,7 @@ import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import mapboxgl from 'mapbox-gl';
 import { IoLocationSharp } from "react-icons/io5";
 
-mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN || 'your-access-token';
+mapboxgl.accessToken ='pk.eyJ1IjoibW9oYWRlYjU1MCIsImEiOiJjbHBpNWxnN2kwY3ZlMmltYTc0dmJma284In0.CO4GcWWckpukuIqt5w9aaA';
 
 
 export default function ManageMap({ open, setOpen, latitude, longitude }) {
