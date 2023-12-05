@@ -1,15 +1,18 @@
 import Swal from "sweetalert2";
-import useAllDeliveryMan from "../../Hooks/useAllDeliveryMan";
+
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 import useAllParcels from "../../Hooks/useAllParcels";
+import useAllDeliveryMan from "../../Hooks/useAllDeliveryMan";
+
 
 
 export default function ManageParcel({ open, setOpen, parcelId}) {
 
     const axiosSecure = useAxiosSecure();
-    const { allDeliveryMan } = useAllDeliveryMan();
     const { allParcels , refetch} = useAllParcels();
+    const { allDeliveryMan , isLoading } = useAllDeliveryMan();
+
 
 
   const handleSubmit = (e) => {

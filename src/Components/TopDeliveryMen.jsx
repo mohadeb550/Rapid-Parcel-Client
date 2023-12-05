@@ -1,12 +1,21 @@
 import CountUp from 'react-countup';
 import Rating from 'react-rating';
 import { BsStar, BsStarFill } from 'react-icons/bs'
-import useAllDeliveryMan from '../Hooks/useAllDeliveryMan';
+import { useQuery } from '@tanstack/react-query';
+import useAxiosPublic from '../Hooks/useAxiosPublic';
 
 
 export default function TopDeliveryMen() {
 
-  const { allDeliveryMan , isLoading } = useAllDeliveryMan();
+  const axiosPublic = useAxiosPublic()
+
+  const { data: topDeliveryMan =[] } = useQuery({
+    queryKey: ['top-delivery-man'],
+    queryFn: async () => {
+      const data = await axiosPublic.get(`/top-delivery-man`);
+      return data.data;
+    }
+  })
 
     return (
       <section className="my-24 mt-32 lg:my-44">
@@ -18,7 +27,7 @@ export default function TopDeliveryMen() {
        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center gap-7  mb-8 md:mb-12 px-8 md:px-0">
   {/* card */}
 
-      {allDeliveryMan?.map(topMan =>  <div key={topMan._id} className="block rounded-md w-full border bg-[#014BA0] border-[#014BA0]/10 dark:bg-neutral-700 font-play">
+      {topDeliveryMan?.map(topMan =>  <div key={topMan._id} className="block rounded-md w-full border bg-[#014BA0] border-[#014BA0]/10 dark:bg-neutral-700 font-play">
      <div className="p-6 pb-4 flex items-center justify-center dz-media">
      <img className="border-b w-28 h-28 md:w-44 md:h-44 object-cover rounded-full bg-amber-400 p-1 shadow-2xl"  src={topMan.image} />
      </div>
