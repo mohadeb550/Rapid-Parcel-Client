@@ -77,7 +77,7 @@ export default function DeliveryList() {
     }).then((result) => {
       if (result.isConfirmed) {
 
-      axiosSecure.patch(`/update/${id}`, updatedParcel)
+      axiosSecure.patch(`/update/${id}?status=makedelivered`, updatedParcel)
     .then(res => {
    
       if(res.data.modifiedCount){
