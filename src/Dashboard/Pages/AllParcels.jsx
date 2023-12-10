@@ -16,6 +16,8 @@ import { RotatingTriangles } from "react-loader-spinner";
 export default function AllParcels() {
 
   const [ parcelId ,setParcelId ] = useState('');
+  const [ notificationReceiver, setNotificationReceiver ] = useState('');
+  const [ parcelName, setParcelName ] = useState('');
   const [ isOpen ,setIsOpen ] = useState(false);
   const [ openDate, setOpenDate ] = useState(false);
 
@@ -146,9 +148,9 @@ export default function AllParcels() {
               <td className="whitespace-nowrap font-medium  text-sm md:text-lg border-r px-6 py-4 dark:border-neutral-500">
              
             
-             <button onClick={() => {setParcelId(parcel._id); setIsOpen(!isOpen)}} className={`bg-amber-600 p-1 px-2 md:py-2 md:px-4 text-white rounded font-semibold transition-all hover:bg-amber-700 text-[12px] md:text-base disabled:bg-gray-200 disabled:text-gray-400`} > 
+             <button onClick={() => {setParcelId(parcel._id); setNotificationReceiver(parcel.email); setParcelName(parcel.parcel_type); setIsOpen(!isOpen)}} className={`bg-amber-600 p-1 px-2 md:py-2 md:px-4 text-white rounded font-semibold transition-all hover:bg-amber-700 text-[12px] md:text-base disabled:bg-gray-200 disabled:text-gray-400`} > 
              Manage </button>
-           {isOpen && <ManageParcel open={isOpen} setOpen={setIsOpen} parcelId={parcelId} />}
+           {isOpen && <ManageParcel open={isOpen} setOpen={setIsOpen} parcelId={parcelId} receiverEmail={notificationReceiver} parcelName={parcelName} />}
     
                </td>
             

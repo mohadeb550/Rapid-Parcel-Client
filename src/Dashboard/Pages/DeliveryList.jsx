@@ -62,7 +62,8 @@ export default function DeliveryList() {
   });
 }
 
-  const handleDeliver = (id) => {
+  const handleDeliver = (id, parcelName, bookedEmail) => {
+    
     const updatedParcel = {
       status:'delivered', 
   }
@@ -85,13 +86,25 @@ export default function DeliveryList() {
         axiosSecure.patch(`/update-total-delivered/${currentUser.email}`)
         .then(res => {
       
-          if(res.data.modifiedCount){
-            Swal.fire({
-              title: "Delivered!",
-              text: "You Delivered The Parcel 😜!",
-              icon: "success"
-            });
+          if(res.data.modifiedCount){       
             refetch();
+            const notification = {
+              receiverEmail : bookedEmail,  
+              title: `Your parcel "${parcelName}" has delivered, Please check your email`,
+              parcelName,
+              isRead: false,
+              date: new Date(),
+            }
+            axiosSecure.post('/insert-notification', notification )
+            .then(res =>{
+              if(res.data._id){
+                Swal.fire({
+                  title: "Delivered!",
+                  text: "You Delivered The Parcel 😜!",
+                  icon: "success"
+                });
+              }
+            })
           }
         })
       }
@@ -235,7 +248,7 @@ export default function DeliveryList() {
               <td className="whitespace-nowrap font-medium  text-sm md:text-lg border-r px-6 py-4 dark:border-neutral-500">
             {
                 parcel.status === 'delivered'? 'Delivered' :
-                <button onClick={() => handleDeliver(parcel._id)} className="bg-green-600 p-1 px-2 md:py-2 md:px-4 text-white rounded font-semibold transition-all hover:bg-green-700 text-[12px] md:text-base disabled:bg-gray-200 disabled:text-gray-400 " disabled={parcel.status === 'cancelled'} > 
+                <button onClick={() => handleDeliver(parcel._id, parcel.parcel_type, parcel.email)} className="bg-green-600 p-1 px-2 md:py-2 md:px-4 text-white rounded font-semibold transition-all hover:bg-green-700 text-[12px] md:text-base disabled:bg-gray-200 disabled:text-gray-400 " disabled={parcel.status === 'cancelled'} > 
                Deliver </button>
                 
             }

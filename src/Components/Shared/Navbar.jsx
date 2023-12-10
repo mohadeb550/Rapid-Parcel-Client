@@ -4,7 +4,13 @@ import toast from "react-hot-toast"
 import axios from "axios";
 import useAuth from "../../Hooks/useAuth";
 import { IoNotificationsSharp } from "react-icons/io5";
+import { IoMdNotificationsOff } from "react-icons/io";
 import { useLocation } from "react-router-dom/dist";
+import { MdCircleNotifications } from "react-icons/md";
+import TimeAgo from 'react-timeago'
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+
 
 
 
@@ -15,6 +21,15 @@ export default function Navbar() {
   const { currentUser , logOut } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const axiosSecure = useAxiosSecure();
+
+  const { data: allNotifications =[] } = useQuery({
+    queryKey: ['all-notification'],
+    queryFn: async () => {
+      const data = await axiosSecure.get(`/get-notifications/${currentUser.email}`);
+      return data.data;
+    }
+  })
 
 
   const navLinks = <>
@@ -60,11 +75,24 @@ export default function Navbar() {
   </div>
 
 
+  <div className="mr-4 dropdown dropdown-end  ">
+    
+  <div tabIndex={0} role="button" className="relative" > {allNotifications?.length? <span className="w-5 text-center absolute -top-1 -right-2 bg-red-600 text-gray-50 text-xs p-[1px] rounded-full">  {allNotifications?.length} </span> : '' } <IoNotificationsSharp className="text-amber-500 cursor-pointer" size={25} /> </div>
+  <div tabIndex={0} className="dropdown-content mt-2 z-[1] -right-16 menu p-4 shadow bg-base-100 rounded w-80 h-96">
+
+    {allNotifications?.map(notification => <div key={notification._id} className="flex items-center gap-2 font-prompt my-2 pb-2 border-b"> <MdCircleNotifications className="text-sky-600" size={28} /> <div> <p className="text-gray-700">  {notification.title} </p> <time className="text-xs text-gray-500">
+      <TimeAgo date={notification.date} />
+      </time> </div> </div>)}
+
+      {!allNotifications?.length && <div className="flex flex-col h-full justify-center items-center"> <IoMdNotificationsOff size={60} className="text-gray-500" /> <span className=" text-gray-600 italic mt-2">  No Notifications</span> </div>}
+   
+  </div>
+
+    </div>
+
+
   <div className="dropdown dropdown-end flex items-center justify-center gap-2 z-50">
     
-    <div className="mr-4">
-    <IoNotificationsSharp className="text-amber-500 cursor-pointer" size={25} /> 
-    </div>
         {!currentUser && <Link to='/login'><button className={`font-semibold text-[#014BA0]  text-sm md:text-[16px] p-1 px-3 rounded bg-gray-50 hover:bg-gray-100 `}> Login </button></Link>}
         
         <div className="z-30 lg:w-10 rounded-full p-[2px] mr-2">

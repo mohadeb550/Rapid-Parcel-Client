@@ -7,7 +7,8 @@ import useAllDeliveryMan from "../../Hooks/useAllDeliveryMan";
 
 
 
-export default function ManageParcel({ open, setOpen, parcelId}) {
+export default function ManageParcel({ open, setOpen, parcelId, receiverEmail, parcelName}) {
+  console.log(receiverEmail)
 
     const axiosSecure = useAxiosSecure();
     const { allParcels , refetch} = useAllParcels();
@@ -25,13 +26,27 @@ export default function ManageParcel({ open, setOpen, parcelId}) {
     axiosSecure.patch(`/update/${parcelId}`, updateParcel )
     .then(res => {
       if(res.data.modifiedCount || res.data.matchedCount){
-        refetch();
-        setOpen(false);
-        Swal.fire({
-          title: "Delivery Man Assigned!",
-          text: "The Parcel Is On The Way!.",
-          icon: "success"
-        });
+
+        const notification = {
+          receiverEmail,  
+          title: `Your parcel "${parcelName}" is on-the-way`,
+          parcelName,
+          isRead: false,
+          date: new Date(),
+        }
+        axiosSecure.post('/insert-notification', notification )
+        .then(res =>{
+          if(res.data._id){
+            setOpen(false);
+            refetch();
+
+            Swal.fire({
+              title: "Delivery Man Assigned!",
+              text: "The Parcel Is On The Way!.",
+              icon: "success"
+            });
+          }
+        })
       }
     }).catch(error => {
       toast.error('Something Went Wrong, Try Again', {duration: 3000})
@@ -39,8 +54,12 @@ export default function ManageParcel({ open, setOpen, parcelId}) {
     })
   }
 
+
+
   return (
     <section className="w-screen h-screen fixed top-0 left-0 right-0 bottom-0 z-50  bg-black/10 flex justify-center items-center">
+
+      
        
        <form className="w-[400px] md:w-[500px] p-7 bg-white" onSubmit={handleSubmit}>
 
