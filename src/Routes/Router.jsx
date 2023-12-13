@@ -22,6 +22,8 @@ import UserRoute from "./UserRoute";
 import DeliveryManRoute from "./DeliveryManRoute";
 import Payment from "../Dashboard/Payment";
 import PaymentSuccess from "../Dashboard/PaymentSuccess";
+import ChatComponent from "../Dashboard/Pages/ChatComponent";
+import AdminChatBox from "../Dashboard/Pages/AdminChatBox";
 
 
 
@@ -50,8 +52,10 @@ import PaymentSuccess from "../Dashboard/PaymentSuccess";
       {path: '/dashboard/delivery-list', element: <DeliveryManRoute> <DeliveryList/> </DeliveryManRoute> },
       {path: '/dashboard/my-reviews', element: <DeliveryManRoute> <MyReviews/> </DeliveryManRoute> },
       {path: '/dashboard/statistics', element: <AdminRoute>  <Statistics/> </AdminRoute> },
-      {path: '/dashboard/checkout/:id/:cost', element: <UserRoute> <Payment/> </UserRoute> },
+      {path: '/dashboard/chat', element: <AdminRoute> <AdminChatBox/>  </AdminRoute> },
+      {path: '/dashboard/checkout/:id/:parcel_name/:cost', element: <UserRoute> <Payment/> </UserRoute> },
       {path: '/dashboard/payment-successful', element: <UserRoute> <PaymentSuccess/> </UserRoute> },
+      {path: '/dashboard/support', element: <UserRoute> <ChatComponent/> </UserRoute> },
     ]}
   
   ]);

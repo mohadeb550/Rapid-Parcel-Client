@@ -16,6 +16,7 @@ import useMyReviews from "../Hooks/useMyReviews";
 import useRole from "../Hooks/useRole";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom/dist";
+import { MdChat } from "react-icons/md";
 
 export default function Dashboard() {
 
@@ -86,7 +87,14 @@ export default function Dashboard() {
               
            </NavLink>
         </li>
-        
+
+        <li>
+           <NavLink to="/dashboard/support" className={({isActive})=> isActive? ' flex items-center p-2 t bg-gray-900 text-gray-300 rounded-lg dark:text-white  ': 'flex items-center p-2 text-gray-300 rounded-lg dark:text-white  ' }>
+           <MdChat size={22} className="text-gray-400" />
+              <span className="flex-1 ms-3 whitespace-nowrap"> Live Support</span>
+             
+           </NavLink>
+        </li>
      </ul>
      }
 
@@ -152,6 +160,14 @@ export default function Dashboard() {
             
                <span className="flex-1 ms-3 whitespace-nowrap"> All Delivery Man</span>
                <span className="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300"> {allDeliveryMan.length} </span>
+            </NavLink>
+         </li>
+
+         <li>
+            <NavLink to="/dashboard/chat"   className={({isActive})=> isActive? ' flex items-center p-2 text-gray-300 bg-gray-900 rounded-lg dark:text-white  dark:hover:bg-gray-700 group ': 'flex items-center p-2 text-gray-300 rounded-lg dark:text-white  dark:hover:bg-gray-700 group' }>
+            <MdChat size={23} className="text-gray-400" />
+               <span className="flex-1 ms-3 whitespace-nowrap"> Chat Box </span>
+               
             </NavLink>
          </li>
        

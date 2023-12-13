@@ -5,6 +5,7 @@ import useAxiosPublic from '../../Hooks/useAxiosPublic';
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { Oval } from "react-loader-spinner";
+// import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 
 
 const imageHostingKey = import.meta.env.VITE_IMAGE_HOSTING_KEY;
@@ -18,6 +19,7 @@ export default function AddParcel() {
     const { register, handleSubmit, formState: {errors}} = useForm();
     const navigate = useNavigate();
     const [ loading , setLoading ] = useState(false);
+    // const [ value, setValue ] = useState();
 
 
     const onSubmit = async (data) =>{
@@ -127,6 +129,14 @@ export default function AddParcel() {
         <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"> Delivery Address</label>
         <span className="text-red-600 font-semibold text-sm p-1">{errors.delivery_address?.type === 'required' && 'Delivery Address is required'} </span>
     </div>
+
+    {/* <GooglePlacesAutocomplete
+      apiKey="AIzaSyAZBnMWC3Z66ycilLTSk96W3cgPaz6G3sE"
+      selectProps={{
+        value, onChange: setValue
+      }}
+    /> */}
+
     <div className="relative z-0 w-full mb-5 group">
         <input type="date" id="floating_company" className="block py-2.5 px-0 w-full text-md text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " {...register('req_date')} />
         <label  className="peer-focus:font-medium absolute text-lg text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"> Requested Delivery Date </label>

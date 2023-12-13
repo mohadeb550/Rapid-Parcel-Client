@@ -11,7 +11,7 @@ export default function CheckoutForm() {
 
     const { currentUser } = useAuth();
     const axiosSecure = useAxiosSecure();
-    const { cost, id } = useParams();
+    const { cost, id, parcel_name } = useParams();
     const [ loading , setLoading ] = useState(false);
 
     const [ clientSecret, setClientSecret ] = useState({});
@@ -81,13 +81,28 @@ export default function CheckoutForm() {
              const res = await axiosSecure.post('/payments', payment);
             if(res.data._id){
 
-       const updatedParcel = {  payment :'paid' }
+       const updatedParcel = {  payment :'paid'}
 
               axiosSecure.patch(`/update/${id}`, updatedParcel)
               .then(res => {
                 if(res.data.modifiedCount){
-                  setLoading(false)
-                navigate('/dashboard/payment-successful');
+
+                  const notification = {
+                    receiverEmail : currentUser.email,  
+                    title: `Your payment for "${parcel_name}" has successfully`,
+                    parcelName : parcel_name,
+                    isRead: false,
+                    date: new Date(),
+                  }
+                 
+                  axiosSecure.post('/insert-notification', notification )
+                  .then(res =>{
+
+                    if(res.data._id){
+                      setLoading(false)
+                      navigate('/dashboard/payment-successful');
+                    }
+                  })
                 }
               }).catch(error => {
                 toast.error('Something Went Wrong, Try Again', {duration: 3000})
