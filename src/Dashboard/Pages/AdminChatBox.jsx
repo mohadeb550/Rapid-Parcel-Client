@@ -1,32 +1,35 @@
 
 import { useEffect, useState } from 'react';
-import useConnectSocket from '../../Hooks/useConnectSocket'
 import useAuth from '../../Hooks/useAuth'
+
+import io from 'socket.io-client';
+const socket = io('http://localhost:5000/'); // Connect to the Socket.io server
+
 
 const AdminChatBox = () => {
 
-    const socket = useConnectSocket();
-
     const { currentUser } = useAuth()
+    const [ userMessages, setUserMessages ] = useState({});
     const [ messages, setMessages ] = useState([]);
 
   useEffect(()=>{
-    
-    socket.on('sendToAdmin', (userMessages) => {
-        console.log(userMessages)
-    })
 
-    // socket.on('message', (msg)=> {
-    //   console.log(msg)
-    // })
-  })
+    socket.on('sendToAdmin', (receiveUserMessages) => { setUserMessages(receiveUserMessages)})
+    console.log(userMessages)
+
+    socket.on('message', (msg) => console.log(msg))
+  },[ userMessages, ])
     
+  useEffect(()=> {
+    socket.emit('adminMessage', {
+      senderInfo: {name: currentUser.displayName, photo: currentUser?.photoURL},
+      messages 
+    })
+  }, [messages, currentUser])
 
 
     const handleSendMessage = (e) => {
         e.preventDefault();
-
-        socket.emit('userMessage', e.target.message.value)
         setMessages([...messages, e.target.message.value])
         e.target.reset();
     }
@@ -41,11 +44,12 @@ const AdminChatBox = () => {
     <div className="px-5 py-5 flex justify-between items-center bg-white border-b-2">
       <div className="font-semibold text-2xl text-gray-500">GoingChat</div>
       
-      <div
+      
+      {userMessages?.senderInfo?.photo? <div className='flex items-center gap-3'><h2 className=' font-bold text-gray-500 uppercase'> {userMessages?.senderInfo?.name} </h2> <img src={userMessages.senderInfo.photo} className='h-12 w-12 rounded-full' /> </div> : <div
         className="h-12 w-12 p-2 bg-yellow-500 rounded-full text-white font-semibold flex items-center justify-center"
       >
-        RA
-      </div>
+        {userMessages.senderInfo?.name.split(0,1)}
+      </div>}
     </div>
   
     <div className="flex flex-row justify-between bg-white">
@@ -89,30 +93,22 @@ const AdminChatBox = () => {
           </div>
         </div>
    
- 
       </div>
-  
+
 
       <div className="w-full max-h-[600px] overflow-y-auto  px-5 flex flex-col justify-between">
         <div className="flex flex-col mt-5">
-          <div className="flex justify-end mb-4">
-            <div
-              className="mr-2 py-3 px-4 bg-blue-400 rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white"
-            >
-              Welcome to group everyone !
-            </div>
-            <img
-              src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
-              className="object-cover h-8 w-8 rounded-full"
-              alt=""
-            />
+          <div className="flex flex-col justify-end mb-4">
+
+          {userMessages?.messages?.map((userMessage, index) =>  <div key={userMessage +index} className="flex flex-row-reverse gap-3 mt-2">  <img className='w-10 h-10 rounded-full object-cover' src={userMessages.senderInfo.photo}/>  <p className='ml-2 py-3 px-4 bg-gray-400 rounded text-white'>{userMessage} </p></div> )}
+
           </div>
          
           
           <div className="flex justify-start mb-4">
             <div>
 
-          {messages?.map((userMessage, index) =>  <div key={userMessage +index} className="flex mt-2">  <img className='w-10 h-10 rounded-full object-cover' src={currentUser.photoURL}/>  <p className='ml-2 py-3 px-4 bg-gray-400 rounded-br-3xl rounded-tr-3xl rounded-tl-xl text-white'>{userMessage} </p></div> )}
+          {messages?.map((userMessage, index) =>  <div key={userMessage +index} className="flex mt-2">  <img className='w-10 h-10 rounded-full object-cover' src={currentUser.photoURL}/>  <p className='ml-2 py-3 px-4 bg-gray-400 rounded text-white'>{userMessage} </p></div> )}
            
             </div>
           </div>

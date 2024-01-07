@@ -84,10 +84,11 @@ export default function Navbar() {
   </div>
 
 
-  <div className="mr-4 dropdown dropdown-end">
+  <div className="mr-4 dropdown dropdown-end ">
     
   <div tabIndex={0} role="button" className="relative" > {allNotifications?.length? <span className="w-5 text-center absolute -top-1 -right-2 bg-red-600 text-gray-50 text-xs p-[1px] rounded-full">  {allNotifications?.length} </span> : '' } <IoNotificationsSharp className="text-amber-500 cursor-pointer" size={25} /> </div>
-  <div tabIndex={0} className="dropdown-content mt-2 z-[1] -right-16 menu p-4 shadow bg-base-100 rounded w-80 h-96 overflow-auto">
+  
+  <div tabIndex={0} className="dropdown-content mt-2 z-[1] menu p-4 shadow bg-base-100 rounded w-80 h-96 overflow-auto -left-48">
 
     {allNotifications?.map(notification => <div key={notification._id} className="flex items-center gap-2 font-prompt my-2 pb-2 border-b"> <MdCircleNotifications className="text-sky-600" size={28} /> <div> <p className="text-gray-700">  {notification.title} </p> <time className="text-xs text-gray-500">
       <TimeAgo date={notification.date} />

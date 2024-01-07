@@ -17,12 +17,14 @@ import useRole from "../Hooks/useRole";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom/dist";
 import { MdChat } from "react-icons/md";
+import useAuth from "../Hooks/useAuth";
 
 export default function Dashboard() {
 
    const { user , isLoading} = useRole();
    const navigate = useNavigate();
    const location  = useLocation();
+   const { currentUser } = useAuth()
  
 
    useEffect(() => {
@@ -49,7 +51,7 @@ export default function Dashboard() {
 
     <section className={`${isOpen && 'bg-black/60 xl:bg-transparent fixed top-0 left-0 right-0 z-10 xl:z-0 xl:static w-full h-full'}`}>
 
-   {isOpen &&  <aside className={`fixed top-0 left-0 z-10 pt-10 md:pt-14 xl:pt-16 bg-[#014BA0]  w-64 h-screen transition-transform `} >
+   {isOpen &&  <aside className={`fixed top-0 left-0 z-10 pt-10 md:pt-14 xl:pt-16 bg-[#014BA5]  w-64 h-screen transition-transform `} >
    <div className="h-full px-3 py-4 overflow-y-auto  dark:bg-gray-800">
 
     {isLoading && <Oval
@@ -65,6 +67,17 @@ export default function Dashboard() {
       strokeWidthSecondary={2}
     
     />}
+
+      {/* user/ admin info  */}
+      <div className="pb-8 pt-2 border-b border-gray-300/30 mb-2">
+      <div className="bg-transparent flex items-center gap-2">
+      {currentUser && <img tabIndex={0} src={currentUser?.photoURL || 'https://i.ibb.co/Ttgtb82/pngwing-com-15.png' } className="dropdown w-8 md:w-9 h-8 md:h-9 object-cover cursor-pointer rounded-full border border-gray-400 p-[1px]" />
+      }
+      <p className="text-lg text-gray-300 font-semibold"> {currentUser?.displayName} </p>
+      </div>
+      <h5 className=" text-gray-300"> {currentUser.email} </h5>
+      </div>
+
 
     {/* user routes */}
       {
@@ -175,7 +188,7 @@ export default function Dashboard() {
     }
 
     
-    <ul className="border-t border-white/50 py-4 mt-2">
+    <ul>
     <li>
            <NavLink to="/dashboard/my-profile" className={({isActive})=> isActive? ' flex items-center p-2 t bg-gray-900 text-gray-300 rounded-lg dark:text-white  ': 'flex items-center p-2 text-gray-300 rounded-lg dark:text-white  ' }>
               <FaUserLarge size={20} className="text-gray-400" />

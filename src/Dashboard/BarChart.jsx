@@ -11,7 +11,7 @@ export function BarChart() {
         queryKey: ['booking-by-date'],
         queryFn : async () => {
     
-          const res = await axiosSecure.get(`/statistics`);
+          const res = await axiosSecure.get(`/booking-by-date`);
           return res.data;
         }
       })
@@ -19,6 +19,7 @@ export function BarChart() {
     const options = {
         title: "Bookings By DATE",
         chartArea: { width: "50%" },
+        backgroundColor: '#f1f8e9'
       };
 
   return (
