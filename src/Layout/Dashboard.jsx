@@ -18,6 +18,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom/dist";
 import { MdChat } from "react-icons/md";
 import useAuth from "../Hooks/useAuth";
+import { GoHistory } from "react-icons/go";
 
 export default function Dashboard() {
 
@@ -105,6 +106,13 @@ export default function Dashboard() {
            <NavLink to="/dashboard/support" className={({isActive})=> isActive? ' flex items-center p-2 t bg-gray-900 text-gray-300 rounded-lg dark:text-white  ': 'flex items-center p-2 text-gray-300 rounded-lg dark:text-white  ' }>
            <MdChat size={22} className="text-gray-400" />
               <span className="flex-1 ms-3 whitespace-nowrap"> Live Support</span>
+             
+           </NavLink>
+        </li>
+        <li>
+           <NavLink to="/dashboard/my-history" className={({isActive})=> isActive? ' flex items-center p-2 t bg-gray-900 text-gray-300 rounded-lg dark:text-white  ': 'flex items-center p-2 text-gray-300 rounded-lg dark:text-white  ' }>
+           <GoHistory size={22} className="text-gray-400" />
+              <span className="flex-1 ms-3 whitespace-nowrap"> Payment History </span>
              
            </NavLink>
         </li>

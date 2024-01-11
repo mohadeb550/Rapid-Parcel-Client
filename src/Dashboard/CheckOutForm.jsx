@@ -74,6 +74,7 @@ export default function CheckoutForm() {
               const payment = {
                 email: currentUser.email,
                 price: parseInt(cost),
+                parcelId : id,
                 transactionId : paymentIntent.id,
                 date : new Date(),
               }

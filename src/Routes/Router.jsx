@@ -24,6 +24,7 @@ import Payment from "../Dashboard/Payment";
 import PaymentSuccess from "../Dashboard/PaymentSuccess";
 import ChatComponent from "../Dashboard/Pages/ChatComponent";
 import AdminChatBox from "../Dashboard/Pages/AdminChatBox";
+import PaymentHistory from "../Dashboard/Pages/PaymentHistory";
 
 
 
@@ -56,6 +57,7 @@ import AdminChatBox from "../Dashboard/Pages/AdminChatBox";
       {path: '/dashboard/checkout/:id/:parcel_name/:cost', element: <UserRoute> <Payment/> </UserRoute> },
       {path: '/dashboard/payment-successful', element: <UserRoute> <PaymentSuccess/> </UserRoute> },
       {path: '/dashboard/support', element: <UserRoute> <ChatComponent/> </UserRoute> },
+      {path: '/dashboard/my-history', element: <UserRoute> <PaymentHistory/> </UserRoute> },
     ]}
   
   ]);
